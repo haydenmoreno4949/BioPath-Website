@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BioPath | Biotechnology Career Pathways</title>
+  
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- MOBILE HEADER -->
+  <header class="mobile-header">
+    <div class="brand-logo">BioPath<span>.</span></div>
+    <button class="mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </header>
+
+  <div class="app-container">
+    
+    <!-- LEFT NAVIGATION BAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="#hero" class="brand">BioPath<span>.</span></a>
+        <p class="brand-subtitle">High School & Graduate Biotech Guide</p>
+      </div>
+
+      <nav class="nav-menu">
+        <ul>
+          <li>
+            <a href="#hero" class="nav-link active">
+              <span class="nav-num">01</span>
+              <span class="nav-text">Overview</span>
+            </a>
+          </li>
+          <li>
+            <a href="#degrees" class="nav-link">
+              <span class="nav-num">02</span>
+              <span class="nav-text">Degree Pathways</span>
+            </a>
+          </li>
+          <li>
+            <a href="#careers" class="nav-link">
+              <span class="nav-num">03</span>
+              <span class="nav-text">Career Opportunities</span>
+            </a>
+          </li>
+          <li>
+            <a href="#about" class="nav-link">
+              <span class="nav-num">04</span>
+              <span class="nav-text">About BioPath</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="badge-tag">2026 High School Career Edition</div>
+        <p>© BioPath Initiative</p>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
+
+      <!-- HERO SECTION -->
+      <section id="hero" class="hero-section">
+        <div class="hero-content">
+          <span class="section-tagline">Navigating Life Sciences</span>
+          <h1 class="hero-title">Discover your pathway in modern biotechnology.</h1>
+          <p class="hero-description">
+            Whether starting right after high school or planning a degree, explore high-impact career opportunities in research, clinical affairs, manufacturing, legal, and business development.
+          </p>
+          <div class="hero-actions">
+            <a href="#careers" class="btn btn-primary">Explore Careers <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#degrees" class="btn btn-secondary">Filter by Degree</a>
+          </div>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-card">
+            <span class="stat-number">22</span>
+            <span class="stat-label">Degree Options</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">04</span>
+            <span class="stat-label">High School / Associate Roles</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">14</span>
+            <span class="stat-label">Degree Pathway Careers</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEGREE OPTIONS SECTION -->
+      <section id="degrees" class="section">
+        <div class="section-header">
+          <span class="section-tagline">Academic Foundations</span>
+          <h2 class="section-title">Degree Options</h2>
+          <p class="section-intro">
+            Click on any degree below to filter relevant biotech career pathways matching your field of study.
+          </p>
+        </div>
+
+        <div class="degree-filter-bar">
+          <button class="degree-chip active" data-degree="all">
+            <i class="fa-solid fa-layer-group"></i> All Degrees (22)
+          </button>
+          
+          <button class="degree-chip" data-degree="Biology">Biology</button>
+          <button class="degree-chip" data-degree="Biotechnology">Biotechnology</button>
+          <button class="degree-chip" data-degree="Finance">Finance</button>
+          <button class="degree-chip" data-degree="Business Administration">Business Administration</button>
+          <button class="degree-chip" data-degree="Chemistry">Chemistry</button>
+          <button class="degree-chip" data-degree="Engineering">Engineering</button>
+          <button class="degree-chip" data-degree="Micro/Molecular Biology">Micro/Molecular Biology</button>
+          <button class="degree-chip" data-degree="Computer Science">Computer Science</button>
+          <button class="degree-chip" data-degree="Biochemistry">Biochemistry</button>
+          <button class="degree-chip" data-degree="Bioinformatics">Bioinformatics</button>
+          <button class="degree-chip" data-degree="Computational Biology">Computational Biology</button>
+          <button class="degree-chip" data-degree="Biostatistics">Biostatistics</button>
+          <button class="degree-chip" data-degree="Genomics">Genomics</button>
+          <button class="degree-chip" data-degree="Data Science">Data Science</button>
+          <button class="degree-chip" data-degree="Environmental Health and Safety">Environmental Health and Safety</button>
+          <button class="degree-chip" data-degree="Occupational Health">Occupational Health</button>
+          <button class="degree-chip" data-degree="Environmental Science">Environmental Science</button>
+          <button class="degree-chip" data-degree="Business">Business</button>
+          <button class="degree-chip" data-degree="Administration">Administration</button>
+          <button class="degree-chip" data-degree="Juris Doctor Degree (Law school degree)">Juris Doctor (Law)</button>
+          <button class="degree-chip" data-degree="Accounting">Accounting</button>
+          <button class="degree-chip" data-degree="Economics">Economics</button>
+        </div>
+      </section>
+
+      <!-- CAREER OPPORTUNITIES SECTION -->
+      <section id="careers" class="section">
+        
+        <div class="section-header flex-header">
+          <div>
+            <span class="section-tagline">Career Pathways</span>
+            <h2 class="section-title">Explore Biotech Opportunities</h2>
+          </div>
+
+          <!-- SEARCH & TABS -->
+          <div class="controls-wrapper">
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="searchInput" placeholder="Search career title or requirement...">
+            </div>
+            
+            <div class="tab-buttons">
+              <button class="tab-btn active" data-tab="all">All Roles (18)</button>
+              <button class="tab-btn" data-tab="entry">High School / Associate (4)</button>
+              <button class="tab-btn" data-tab="degree">Bachelor's & Beyond (14)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="active-filter-indicator" id="filterIndicator" style="display: none;">
+          <span>Filtering by degree: <strong id="activeDegreeName">None</strong></span>
+          <button id="clearDegreeFilter"><i class="fa-solid fa-xmark"></i> Clear Filter</button>
+        </div>
+
+        <!-- CAREERS CONTAINER -->
+        <div class="careers-grid" id="careersGrid">
+
+          <!-- ================= HIGH SCHOOL / ASSOCIATE ROLES (4) ================= -->
+          <article class="career-card" data-tier="entry" data-degrees="High School Diploma,Associate Degree">
+            <div class="card-header">
+              <span class="tier-badge hs-badge">High School / Associate Degree</span>
+              <span class="card-num">01</span>
+            </div>
+            <h3 class="card-title">Manufacturing Support</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> High school diploma or associate degree</p>
+            <p class="card-desc">Assists in preparing equipment, handling materials, and maintaining cleanroom environments for biotech production.</p>
+            <div class="card-footer">
+              <span class="field-pill">Operations & Production</span>
+              <button class="card-btn" onclick="openModal('Manufacturing Support', 'High school diploma or associate degree required', 'Assists in preparing equipment, handling raw biological materials, and maintaining cleanroom standards for pharmaceutical and biotech manufacturing lines.', 'High School / Associate', ['Attention to Detail', 'Sanitation Protocols', 'Equipment Assembly'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="entry" data-degrees="High School Diploma,Associate Degree">
+            <div class="card-header">
+              <span class="tier-badge hs-badge">High School / Associate Degree</span>
+              <span class="card-num">02</span>
+            </div>
+            <h3 class="card-title">Facility Maintenance</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> High school diploma or associate degree</p>
+            <p class="card-desc">Ensures specialized laboratory and manufacturing facilities, HVAC systems, and bio-containment equipment run smoothly.</p>
+            <div class="card-footer">
+              <span class="field-pill">Facilities & Engineering</span>
+              <button class="card-btn" onclick="openModal('Facility Maintenance', 'High school diploma or associate degree required', 'Maintains critical lab environment infrastructure, cleanroom ventilation, freezer storage units, and utility systems necessary for biomanufacturing.', 'High School / Associate', ['HVAC Maintenance', 'Facility Operations', 'Safety Protocols'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="entry" data-degrees="High School Diploma,Associate Degree">
+            <div class="card-header">
+              <span class="tier-badge hs-badge">High School / Associate Degree</span>
+              <span class="card-num">03</span>
+            </div>
+            <h3 class="card-title">Basic Laboratory Assistance</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> High school diploma or associate degree</p>
+            <p class="card-desc">Supports senior scientists by preparing solutions, cleaning lab glass, stocking reagents, and maintaining inventory.</p>
+            <div class="card-footer">
+              <span class="field-pill">Laboratory Research</span>
+              <button class="card-btn" onclick="openModal('Basic Laboratory Assistance', 'High school diploma or associate degree required', 'Maintains essential lab cleanliness, prepares basic buffer solutions, catalogs samples, and manages laboratory inventory and glassware sterilization.', 'High School / Associate', ['Reagent Preparation', 'Lab Safety', 'Inventory Management'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="entry" data-degrees="High School Diploma,Associate Degree">
+            <div class="card-header">
+              <span class="tier-badge hs-badge">High School / Associate Degree</span>
+              <span class="card-num">04</span>
+            </div>
+            <h3 class="card-title">Quality Control Technician</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> High school diploma or associate degree</p>
+            <p class="card-desc">Conducts basic testing, sample collection, and inspection of raw materials to maintain quality standards.</p>
+            <div class="card-footer">
+              <span class="field-pill">Quality & Compliance</span>
+              <button class="card-btn" onclick="openModal('Quality Control Technician', 'High school diploma or associate degree required', 'Collects biological samples, performs standard assays, and verifies that production batches adhere to strict regulatory compliance standards.', 'High School / Associate', ['Sample Collection', 'Assay Testing', 'Quality Assurance'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <!-- ================= ROLES REQUIRING MORE THAN HIGH SCHOOL (14) ================= -->
+          <article class="career-card" data-tier="degree" data-degrees="Biology,Biotechnology,Chemistry,Micro/Molecular Biology,Biochemistry,Environmental Science">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">05</span>
+            </div>
+            <h3 class="card-title">Quality Control and Assurance</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires bachelor's degree in a science field</p>
+            <p class="card-desc">Oversees regulatory compliance, audits laboratory workflows, and validates product safety for biotech products.</p>
+            <div class="card-footer">
+              <span class="field-pill">Quality & Compliance</span>
+              <button class="card-btn" onclick="openModal('Quality Control and Assurance', 'Requires bachelor\'s degree in a science field', 'Establishes quality systems, conducts internal audits, reviews batch records, and ensures adherence to FDA and international regulatory guidelines.', 'Bachelor\'s Degree +', ['FDA Compliance', 'Auditing', 'cGMP Guidelines'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Engineering">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">06</span>
+            </div>
+            <h3 class="card-title">Quality Engineer</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires bachelor's degree in an engineering field</p>
+            <p class="card-desc">Designs and optimizes automated biomanufacturing equipment, validation protocols, and quality verification systems.</p>
+            <div class="card-footer">
+              <span class="field-pill">Engineering & Systems</span>
+              <button class="card-btn" onclick="openModal('Quality Engineer', 'Requires bachelor\'s degree in an engineering field', 'Applies engineering principles to design, test, and improve bioprocess machinery, automated systems, and production lines.', 'Bachelor\'s Degree +', ['Equipment Validation', 'Process Design', 'Root Cause Analysis'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Biology,Biotechnology,Micro/Molecular Biology,Biochemistry,Genomics">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">07</span>
+            </div>
+            <h3 class="card-title">Clinical Research and Regulatory Affairs</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires bachelor's in a life science</p>
+            <p class="card-desc">Manages clinical trial documentation, regulatory filings, and patient safety protocols for new medical therapeutics.</p>
+            <div class="card-footer">
+              <span class="field-pill">Clinical & Regulatory</span>
+              <button class="card-btn" onclick="openModal('Clinical Research and Regulatory Affairs', 'Requires bachelor\'s in a life science', 'Coordinates multi-phase human clinical trials, prepares regulatory submissions for health authorities, and ensures ethical trial execution.', 'Bachelor\'s Degree +', ['FDA Submissions', 'Clinical Trials', 'GCP Standards'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Biology,Biotechnology,Chemistry,Micro/Molecular Biology,Biochemistry">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">08</span>
+            </div>
+            <h3 class="card-title">Clinical Research Coordinator</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires bachelor's degree in science or medical field</p>
+            <p class="card-desc">Facilitates daily operations of medical studies, subject recruitment, data collection, and protocol execution.</p>
+            <div class="card-footer">
+              <span class="field-pill">Clinical Operations</span>
+              <button class="card-btn" onclick="openModal('Clinical Research Coordinator', 'Requires bachelor\'s degree in science or medical field', 'Works directly with patients, medical staff, and trial sponsors to schedule visits, manage medical records, and ensure study protocol compliance.', 'Bachelor\'s Degree +', ['Patient Care', 'Data Logging', 'Protocol Execution'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Biology,Biotechnology,Chemistry,Micro/Molecular Biology,Biochemistry">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">09</span>
+            </div>
+            <h3 class="card-title">Pharmacovigilance Specialist</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires bachelor's degree in healthcare/science related field</p>
+            <p class="card-desc">Monitors post-market pharmaceutical safety, investigates adverse drug effects, and reports safety data.</p>
+            <div class="card-footer">
+              <span class="field-pill">Drug Safety</span>
+              <button class="card-btn" onclick="openModal('Pharmacovigilance Specialist', 'Requires bachelor\'s degree in healthcare/science related field', 'Tracks adverse events from medical treatments globally, evaluates drug risk profiles, and reports findings to regulatory bodies.', 'Bachelor\'s Degree +', ['Drug Safety', 'Risk Assessment', 'Adverse Event Reporting'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Biology,Biotechnology,Biochemistry">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">10</span>
+            </div>
+            <h3 class="card-title">Preclinical Discovery Research</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires bachelor's in biology, biotechnology, or biochemistry</p>
+            <p class="card-desc">Conducts laboratory experiments on cell cultures and biological models to discover novel drug candidates.</p>
+            <div class="card-footer">
+              <span class="field-pill">R&D Discovery</span>
+              <button class="card-btn" onclick="openModal('Preclinical Discovery Research', 'Requires bachelor\'s in biology, biotechnology, or biochemistry', 'Works in wet labs performing gene editing, cell culturing, assays, and compound screening before human clinical testing begins.', 'Bachelor\'s Degree +', ['Cell Culture', 'Assay Development', 'Gene Editing'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Bioinformatics,Computational Biology,Computer Science,Data Science,Genomics,Biostatistics">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">11</span>
+            </div>
+            <h3 class="card-title">Bioinformatics</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires bachelor's degree in bioinformatics, computational biology, computer science, or data science</p>
+            <p class="card-desc">Analyzes complex genomic, proteomic, and biological datasets using algorithms, programming, and statistics.</p>
+            <div class="card-footer">
+              <span class="field-pill">Computational Biology</span>
+              <button class="card-btn" onclick="openModal('Bioinformatics Specialist', 'Requires bachelor\'s degree in bioinformatics, computational biology, computer science, or data science', 'Applies Python, R, and machine learning pipelines to analyze DNA sequencing data, biological pathways, and therapeutic targets.', 'Bachelor\'s Degree +', ['Python / R', 'Genomic Sequencing', 'Data Pipelines'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Environmental Health and Safety,Occupational Health,Biology,Chemistry,Environmental Science">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">12</span>
+            </div>
+            <h3 class="card-title">Lab Safety</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires bachelor's degree in Environmental Health and Safety, Occupational Health, Biology, Chemistry, or Environmental Science</p>
+            <p class="card-desc">Enforces biological hazard protocols, hazardous chemical handling, and workplace safety compliance.</p>
+            <div class="card-footer">
+              <span class="field-pill">Environmental Safety</span>
+              <button class="card-btn" onclick="openModal('Lab Safety Specialist', 'Requires bachelor\'s degree in Environmental Health and Safety, Occupational Health, Biology, Chemistry, or Environmental Science', 'Develops biosafety protocols, trains research personnel, manages hazardous waste disposal, and verifies biohazard containment.', 'Bachelor\'s Degree +', ['Biosafety (BSL)', 'Hazardous Waste', 'OSHA Compliance'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Biotechnology,Chemistry,Micro/Molecular Biology,Biochemistry">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">13</span>
+            </div>
+            <h3 class="card-title">Process / Product Development</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires a bachelor's degree in biotechnology, chemistry, or molecular/microbiology</p>
+            <p class="card-desc">Scales laboratory drug discoveries into commercial biomanufacturing formulations and processes.</p>
+            <div class="card-footer">
+              <span class="field-pill">Process Engineering</span>
+              <button class="card-btn" onclick="openModal('Process / Product Development', 'Requires a bachelor\'s degree in biotechnology, chemistry, or molecular/microbiology', 'Optimizes fermentation, cell culture yields, purification techniques, and product formulation for large-scale bioproduction.', 'Bachelor\'s Degree +', ['Fermentation', 'Upstream/Downstream', 'Bioprocess Optimization'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Engineering,Biology,Biotechnology,Chemistry,Micro/Molecular Biology">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">14</span>
+            </div>
+            <h3 class="card-title">Manufacturing / Production</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires a bachelor’s degree in a science or engineering field</p>
+            <p class="card-desc">Leads large-scale bioreactor operations, purification processes, and pharmaceutical production lines.</p>
+            <div class="card-footer">
+              <span class="field-pill">Manufacturing</span>
+              <button class="card-btn" onclick="openModal('Manufacturing / Production Specialist', 'Requires a bachelor’s degree in a science or engineering field', 'Operates commercial-scale bioreactors, filtration units, and automated filling equipment while adhering to sterile manufacturing standards.', 'Bachelor\'s Degree +', ['Bioreactor Operations', 'Cleanroom Standards', 'Production Management'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Business,Administration,Business Administration,Biology,Biotechnology">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">15</span>
+            </div>
+            <h3 class="card-title">Administration</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires a bachelor’s degree in business, administration, or a life science</p>
+            <p class="card-desc">Directs corporate operations, department budgets, facility staffing, and strategic biotech growth.</p>
+            <div class="card-footer">
+              <span class="field-pill">Corporate Management</span>
+              <button class="card-btn" onclick="openModal('Biotech Administration', 'Requires a bachelor’s degree in business, administration, or a life science', 'Coordinates interdepartmental operations, human resources, research budgets, and facility logistics across life science organizations.', 'Bachelor\'s Degree +', ['Operations Strategy', 'Resource Allocation', 'Project Management'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Juris Doctor Degree (Law school degree)">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Juris Doctor (JD) + Bar</span>
+              <span class="card-num">16</span>
+            </div>
+            <h3 class="card-title">Legal Counsel</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires a Juris Doctor Degree and passing the bar exam</p>
+            <p class="card-desc">Protects intellectual property, handles patent filings, biological licensing, and corporate governance.</p>
+            <div class="card-footer">
+              <span class="field-pill">Legal & IP</span>
+              <button class="card-btn" onclick="openModal('Biotech Legal Counsel', 'Requires a Juris Doctor Degree (Law school degree) and passing the bar exam', 'Drafts and defends biotech patents, negotiates technology transfer agreements, and protects gene therapy and drug intellectual property.', 'Post-Graduate (JD)', ['Patent Law', 'IP Protection', 'Licensing Deals'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Finance,Accounting,Business Administration,Economics,Business">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">17</span>
+            </div>
+            <h3 class="card-title">Finance</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires a bachelor's degree in finance, accounting, business administration, or economics</p>
+            <p class="card-desc">Manages R&D capital expenditure, venture investment evaluation, clinical trial budgets, and financial strategy.</p>
+            <div class="card-footer">
+              <span class="field-pill">Finance & Strategy</span>
+              <button class="card-btn" onclick="openModal('Biotech Finance Specialist', 'Requires a bachelor\'s degree in finance, accounting, business administration, or economics', 'Analyzes financial returns on clinical R&D pipelines, manages capital allocation for laboratory facilities, and handles valuation.', 'Bachelor\'s Degree +', ['Financial Modeling', 'R&D Budgeting', 'Capital Valuation'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+          <article class="career-card" data-tier="degree" data-degrees="Biology,Biotechnology,Business,Finance,Business Administration">
+            <div class="card-header">
+              <span class="tier-badge adv-badge">Bachelor's Degree +</span>
+              <span class="card-num">18</span>
+            </div>
+            <h3 class="card-title">Business Development</h3>
+            <p class="card-req"><i class="fa-solid fa-graduation-cap"></i> Requires a bachelor’s degree in life sciences or business/finance</p>
+            <p class="card-desc">Forms strategic partnerships, manages drug licensing acquisition, and expands biotech market presence.</p>
+            <div class="card-footer">
+              <span class="field-pill">Business & Partnerships</span>
+              <button class="card-btn" onclick="openModal('Business Development Manager', 'Requires a bachelor’s degree in life sciences or business/finance', 'Identifies market opportunities, negotiates licensing partnerships with pharmaceutical companies, and manages corporate growth initiatives.', 'Bachelor\'s Degree +', ['Strategic Partnerships', 'Market Evaluation', 'Licensing Agreements'])">
+                Details <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section id="about" class="section alt-bg">
+        <div class="section-header">
+          <span class="section-tagline">Our Mission</span>
+          <h2 class="section-title">About BioPath</h2>
+          <p class="section-intro">
+            BioPath was created to guide high school graduates and early-career learners through the diverse universe of biotechnology careers—bridging the gap between education and high-growth industry opportunities.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="about-icon"><i class="fa-solid fa-compass"></i></div>
+            <h3>Clear Pathways</h3>
+            <p>Direct guidance on whether you can start working right out of high school or if a specialized degree is required.</p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-icon"><i class="fa-solid fa-dna"></i></div>
+            <h3>Multi-Disciplinary</h3>
+            <p>Biotech isn't just lab work. It spans engineering, law, computer science, finance, and environmental health.</p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h3>High School Focused</h3>
+            <p>Designed specifically for recent high school graduates looking to understand their post-graduation options.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <h3>BioPath<span>.</span></h3>
+            <p>Modern Biotechnology Career Navigation System</p>
+          </div>
+          <div class="footer-links">
+            <a href="#hero">Overview</a>
+            <a href="#degrees">Degrees</a>
+            <a href="#careers">Careers</a>
+            <a href="#about">About</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 BioPath Initiative. Built for High School Graduates & Educators.</p>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- SLIDE-OVER / MODAL DRAWER FOR CAREER DETAILS -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-drawer" id="modalDrawer">
+      <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-header">
+        <span class="tier-badge" id="modalTierBadge">High School / Associate</span>
+        <h2 id="modalTitle">Career Title</h2>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h4><i class="fa-solid fa-graduation-cap"></i> Education Requirement</h4>
+          <p id="modalReq" class="highlight-text">Requirement info goes here...</p>
+        </div>
+        <div class="modal-section">
+          <h4><i class="fa-solid fa-file-lines"></i> Role Summary</h4>
+          <p id="modalDesc">Description info goes here...</p>
+        </div>
+        <div class="modal-section">
+          <h4><i class="fa-solid fa-key"></i> Key Competencies</h4>
+          <div id="modalSkills" class="skills-tags"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" onclick="closeModal()">Close Details</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
