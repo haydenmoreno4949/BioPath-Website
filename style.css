@@ -810,3 +810,9 @@
       gap: 2rem;
     }
   }
+  h2{
+    font-size:30px;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
