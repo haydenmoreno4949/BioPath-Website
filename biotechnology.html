@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BioPath | Biotechnology Career Pathways</title>
-  
+  <title>BioPath | What Is Biotechnology?</title>
+
   <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Custom Stylesheet -->
+
+  <!-- Custom Stylesheets (pages.css must come after style.css) -->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pages.css">
 </head>
-<body>
+<body class="page-inner">
 
   <!-- MOBILE HEADER -->
   <header class="mobile-header">
@@ -27,87 +28,141 @@
   </header>
 
   <div class="app-container">
-    
-<!-- LEFT NAVIGATION BAR -->
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <a href="index.html" class="brand">BioPath<span>.</span></a>
-    <p class="brand-subtitle">High School & Graduate Biotech Guide</p>
-  </div>
 
-  <nav class="nav-menu">
-    <ul>
-      <li>
-        <a href="index.html" class="nav-link">
-          <span class="nav-num">01</span>
-          <span class="nav-text">Home</span>
-        </a>
-      </li>
-      <li>
-        <a href="biotechnology.html" class="nav-link">
-          <span class="nav-num">02</span>
-          <span class="nav-text">What is Biotechnology</span>
-        </a>
-      </li>
-      <li>
-        <li>
-          <a href="internship.html" class="nav-link">
-            <span class="nav-num">03</span>
-            <span class="nav-text">Internship Opportunities</span>
-          </a>
-        </li>
-        <a href="careers.html" class="nav-link">
-          <span class="nav-num">04</span>
-          <span class="nav-text">Search Career Paths</span>
-        </a>
-      </li>
-      <li>
-        <a href="programs.html" class="nav-link">
-          <span class="nav-num">05</span>
-          <span class="nav-text">Additional Programs</span>
-        </a>
-      </li>
-      <li>
-        <a href="maps.html" class="nav-link active">
-          <span class="nav-num">06</span>
-          <span class="nav-text">Maps</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+    <!-- LEFT NAVIGATION BAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand">BioPath<span>.</span></a>
+        <p class="brand-subtitle">High School &amp; Graduate Biotech Guide</p>
+      </div>
 
-  <div class="sidebar-footer">
-    <div class="badge-tag">2026 High School Edition</div>
-    <p>© BioPath Initiative</p>
-  </div>
-</aside>
+      <nav class="nav-menu">
+        <ul>
+          <li>
+            <a href="index.html" class="nav-link">
+              <span class="nav-num">01</span>
+              <span class="nav-text">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="biotechnology.html" class="nav-link active" aria-current="page">
+              <span class="nav-num">02</span>
+              <span class="nav-text">What is Biotechnology</span>
+            </a>
+          </li>
+          <li>
+            <a href="internship.html" class="nav-link">
+              <span class="nav-num">03</span>
+              <span class="nav-text">Internship Opportunities</span>
+            </a>
+          </li>
+          <li>
+            <a href="careers.html" class="nav-link">
+              <span class="nav-num">04</span>
+              <span class="nav-text">Search Career Paths</span>
+            </a>
+          </li>
+          <li>
+            <a href="programs.html" class="nav-link">
+              <span class="nav-num">05</span>
+              <span class="nav-text">Additional Programs</span>
+            </a>
+          </li>
+          <li>
+            <a href="maps.html" class="nav-link">
+              <span class="nav-num">06</span>
+              <span class="nav-text">Maps</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-      <!-- HERO SECTION -->
-      <section id="hero" class="hero-section">
+      <div class="sidebar-footer">
+        <div class="badge-tag">2026 High School Edition</div>
+        <p>© BioPath Initiative</p>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
+
+      <!-- HERO: DEFINITION -->
+      <section id="hero" class="hero-section page-hero">
         <div class="hero-content">
           <span class="section-tagline">Navigating Life Sciences</span>
           <h1 class="hero-title">What Is Biotechnology?</h1>
-          <div style="display: flex; align-items: center; gap: 20px;">
+
+          <div class="intro-split">
             <div>
-                <h2>Definition:</h2>
-                <p class="hero-description">
-                  Biotechnology is the use of biology and living organisms to create products, tools, and technologies that improve human life and health of the planet. Biotechnology is used in fields like medicine, agriculture, industrial and environment, and diagnostic research. 
-                </p>
+              <p class="lead">
+                Biotechnology is the use of biology and living organisms to create products, tools, and technologies that improve human life and the health of the planet.
+              </p>
+
+              <div class="used-in">
+                <h2 class="used-in-title">Biotechnology is used in fields like:</h2>
+                <ul class="field-list">
+                  <li><i class="fa-solid fa-pills" aria-hidden="true"></i> Medicine</li>
+                  <li><i class="fa-solid fa-seedling" aria-hidden="true"></i> Agriculture</li>
+                  <li><i class="fa-solid fa-industry" aria-hidden="true"></i> Industrial and environment</li>
+                  <li><i class="fa-solid fa-microscope" aria-hidden="true"></i> Diagnostic research</li>
+                </ul>
+              </div>
             </div>
-            <img src="https://media.istockphoto.com/id/2237939154/photo/testing-liquid-from-green-glass-pipette-into-test-tubes-on-yellow-reflective-background.jpg?s=612x612&w=0&k=20&c=17yjPk_HIKMIRrXOTbRv3jCrURWBUcx14H6dLI_cJOc=" alt="Water biotech image" style="width: 250px; height: auto;">
+
+            <figure class="photo-frame">
+              <img
+                src="https://media.istockphoto.com/id/2237939154/photo/testing-liquid-from-green-glass-pipette-into-test-tubes-on-yellow-reflective-background.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=17yjPk_HIKMIRrXOTbRv3jCrURWBUcx14H6dLI_cJOc="
+                alt="A green glass pipette dropping liquid into test tubes in a laboratory"
+                width="612" height="612" loading="lazy">
+            </figure>
           </div>
-          <!--What is the difference between biotechnology companies and pharmaceutical companies? -->
-          <div style="display: flex; align-items: center; gap: 20px;">
-            <div>
-                <h2>What is the difference between biotechnology companies and pharmaceutical companies? :</h2>
-                <p class="hero-description">
-                    While Biotechnology and Pharmaceutical Companies do have lots of similarities and overlap in what they do, biotechnology specifically uses living organisms to produce the products they market while pharmaceutical companies use not only living organisms, but also things like synthetic molecules, inorganic reagents and solvents, and purified enzymes. Some companies are considered Biopharmaceutical which is a mix between Biotechnology and Pharmaceutical where they combine biological science and chemical manufacturing to develop, scale, and commercialize large molecule drugs derived from living organisms. 
-                </p>
-            </div>
-            <img src="https://media.istockphoto.com/id/2237939154/photo/testing-liquid-from-green-glass-pipette-into-test-tubes-on-yellow-reflective-background.jpg?s=612x612&w=0&k=20&c=17yjPk_HIKMIRrXOTbRv3jCrURWBUcx14H6dLI_cJOc=" alt="Water biotech image" style="width: 250px; height: auto;">
+        </div>
+      </section>
+
+      <!-- BIOTECH VS PHARMA -->
+      <section id="comparison" class="block-section alt-bg">
+        <h2 class="block-title">What is the difference between biotechnology companies and pharmaceutical companies?</h2>
+        <p class="block-intro">
+          Biotechnology and pharmaceutical companies have a lot of similarities and overlap in what they do. The key difference is what goes into the products they market.
+        </p>
+
+        <div class="compare-grid">
+          <article class="compare-card">
+            <h3>Biotechnology</h3>
+            <p>Biotechnology companies use living organisms to produce the products they market.</p>
+            <span class="compare-uses">Living organisms only</span>
+          </article>
+
+          <article class="compare-card is-blend">
+            <h3>Biopharmaceutical</h3>
+            <p>Some companies are biopharmaceutical, a mix between biotechnology and pharmaceutical. They combine biological science and chemical manufacturing to develop, scale, and commercialize large molecule drugs derived from living organisms.</p>
+            <span class="compare-uses">A mix of both</span>
+          </article>
+
+          <article class="compare-card">
+            <h3>Pharmaceutical</h3>
+            <p>Pharmaceutical companies use not only living organisms, but also things like synthetic molecules, inorganic reagents and solvents, and purified enzymes.</p>
+            <span class="compare-uses">Living organisms and other materials</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <h3>BioPath<span>.</span></h3>
+            <p>Modern Biotechnology Career Navigation System</p>
           </div>
-        </section>   
-</div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 BioPath Initiative. Built for High School Graduates &amp; Educators.</p>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
   <!-- Custom JavaScript -->
   <script src="script.js"></script>
 </body>
