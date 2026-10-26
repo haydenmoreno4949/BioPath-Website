@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BioPath | Search Career Paths</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+  <!-- MOBILE HEADER -->
+  <header class="mobile-header">
+    <div class="brand-logo">BioPath<span>.</span></div>
+    <button class="mobile-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </header>
+
+  <div class="app-container">
+    
+<!-- LEFT NAVIGATION BAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a href="index.html" class="brand">BioPath<span>.</span></a>
+    <p class="brand-subtitle">High School & Graduate Biotech Guide</p>
+  </div>
+
+  <nav class="nav-menu">
+    <ul>
+      <li>
+        <a href="index.html" class="nav-link">
+          <span class="nav-num">01</span>
+          <span class="nav-text">Home</span>
+        </a>
+      </li>
+      <li>
+        <a href="biotechnology.html" class="nav-link">
+          <span class="nav-num">02</span>
+          <span class="nav-text">What is Biotechnology</span>
+        </a>
+      </li>
+      <li>
+        <li>
+          <a href="internship.html" class="nav-link">
+            <span class="nav-num">03</span>
+            <span class="nav-text">Internship Opportunities</span>
+          </a>
+        </li>
+        <a href="careers.html" class="nav-link">
+          <span class="nav-num">04</span>
+          <span class="nav-text">Search Career Paths</span>
+        </a>
+      </li>
+      <li>
+        <a href="programs.html" class="nav-link">
+          <span class="nav-num">05</span>
+          <span class="nav-text">Additional Programs</span>
+        </a>
+      </li>
+      <li>
+        <a href="maps.html" class="nav-link active">
+          <span class="nav-num">06</span>
+          <span class="nav-text">Maps</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="badge-tag">2026 High School Edition</div>
+    <p>© BioPath Initiative</p>
+  </div>
+</aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <section id="hero" class="hero-section">
+        <div class="hero-content">
+          <span class="section-tagline">Navigating Life Sciences</span>
+          <h1 class="hero-title">Search Career Paths</h1>
+          <p class="hero-description">
+            Explore biotechnology career profiles organized into 5 primary industry sectors. Search for specific roles or scroll through the sector columns below.
+          </p>
+        </div>
+      </section>
+
+
+      <!-- CONTROLS & COLOR KEY SECTION -->
+      <section class="section" style="padding-bottom: 2rem;">
+        
+        <!-- SEARCH BAR -->
+        <div class="career-search-container">
+          <div class="search-box main-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="careerSearchInput" placeholder="Search career title, degree required, salary, or responsibilities...">
+          </div>
+        </div>
+
+        <!-- COLOR KEY LEGEND -->
+        <div class="color-key-wrapper">
+          <span class="key-title"><i class="fa-solid fa-palette"></i> Sector Color Key:</span>
+          <div class="key-items">
+            <div class="key-item key-qc">
+              <span class="key-dot"></span>
+              <span class="key-label">Quality Control</span>
+            </div>
+            <div class="key-item key-clinical">
+              <span class="key-dot"></span>
+              <span class="key-label">Clinical Research</span>
+            </div>
+            <div class="key-item key-rd">
+              <span class="key-dot"></span>
+              <span class="key-label">Research & Development</span>
+            </div>
+            <div class="key-item key-ops">
+              <span class="key-dot"></span>
+              <span class="key-label">Operations</span>
+            </div>
+            <div class="key-item key-finadmin">
+              <span class="key-dot"></span>
+              <span class="key-label">Finance & Administration</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 SCROLLABLE COLUMNS MATRIX -->
+      <section class="section columns-section">
+        <div class="columns-scroll-container">
+          
+          <!-- COLUMN 1: QUALITY CONTROL -->
+          <div class="sector-column col-qc" data-category="qc">
+            <div class="column-header">
+              <div class="col-icon"><i class="fa-solid fa-check-double"></i></div>
+              <h3>Quality Control</h3>
+              <span class="col-count">3 Roles</span>
+            </div>
+
+            <div class="column-cards">
+
+              <!-- QC Card 1 -->
+              <article class="job-card theme-qc" data-keywords="quality control assurance car-t cgmp lims bachelors">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Quality Control</span>
+                  <span class="card-id">QC-01</span>
+                </div>
+                <h4 class="job-title">Quality Control & Assurance</h4>
+                <p class="job-summary">Performs testing related to the manufacturing of cell therapy products for clinical trials and commercial operations in a controlled cGMP cleanroom environment.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Education Needed</span>
+                    <p class="meta-value">Bachelor's Degree in Science, Engineering, or equivalent technical discipline.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary (New Jersey)</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $54,200/yr | <strong>Median:</strong> $71,252/yr | <strong>Senior:</strong> $80,400/yr
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Key Responsibilities:</h5>
+                  <ul>
+                    <li>Conduct analytical testing of raw materials/utilities, in-process, or final autologous CAR-T products.</li>
+                    <li>Ensure compliance with procedures, safety policies, and cGMP regulations.</li>
+                    <li>Write peer reviews and approve laboratory data using Electronic Laboratory Systems (LIMS).</li>
+                    <li>Work routinely in cleanrooms with biological materials and hazardous chemicals.</li>
+                  </ul>
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Varied daily routine depending on machine calibration or processing issues. Activities involve document updates, reference compliance checks (QSR), and laboratory testing cycles.</p>
+                  <p class="source-link"><a href="https://medicaldevicecourses.com/forums/quality-control-and-quality-assurance/a-day-in-the-life-working-in-qa-qc/" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Read QA/QC Employee Experiences</a></p>
+                </div>
+              </article>
+
+              <!-- QC Card 2 -->
+              <article class="job-card theme-qc" data-keywords="quality engineer wind testing audits internal external bachelors masters">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Quality Control</span>
+                  <span class="card-id">QC-02</span>
+                </div>
+                <h4 class="job-title">Quality Engineer</h4>
+                <p class="job-summary">Creates processes, testing procedures, and system implementations to ensure biological and industrial products fulfill strict quality and safety regulations.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Education Needed</span>
+                    <p class="meta-value">Bachelor's in Engineering with experience. Preferred: Master's degree & advanced certifications.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $78,700–$85,319 | <strong>Median:</strong> $102,597/yr | <strong>Senior:</strong> $126,800–$152,128
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Develop, test, revise, and audit manufacturing processes continuously through both internal company audits and external supplier location audits. Quality engineers advise product developers on modified plans, cost impact, and project timeline feasibility.</p>
+                </div>
+              </article>
+
+              <!-- QC Card 3 -->
+              <article class="job-card theme-qc" data-keywords="quality control technician cqt high school associate cqt inspection">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Quality Control</span>
+                  <span class="card-id">QC-03</span>
+                </div>
+                <h4 class="job-title">Quality Control Technician</h4>
+                <p class="job-summary">Inspects and tests raw materials, components, and finished products in manufacturing environments to maintain product consistency and compliance.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Education Progression</span>
+                    <p class="meta-value">High School Diploma → Associate Degree/Certificates → Hands-on Experience → Certified Quality Technician (CQT).</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $38,000/yr | <strong>Median:</strong> $48,000/yr | <strong>Senior:</strong> $75,000/yr<br>
+                      <em>*Pharma technicians often earn higher wages.</em>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Technician Specializations:</h5>
+                  <div class="tag-row">
+                    <span class="micro-tag">Manufacturing</span>
+                    <span class="micro-tag">Material</span>
+                    <span class="micro-tag">Product</span>
+                    <span class="micro-tag">Statistical</span>
+                  </div>
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Uses specialized testing equipment to inspect incoming materials, resolves quality issues on the shop floor, maintains strict testing logs, and works directly with production teams on corrective actions.</p>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <!-- COLUMN 2: CLINICAL RESEARCH -->
+          <div class="sector-column col-clinical" data-category="clinical">
+            <div class="column-header">
+              <div class="col-icon"><i class="fa-solid fa-notes-medical"></i></div>
+              <h3>Clinical Research</h3>
+              <span class="col-count">3 Roles</span>
+            </div>
+
+            <div class="column-cards">
+
+              <!-- Clinical Card 1 -->
+              <article class="job-card theme-clinical" data-keywords="clinical research regulatory affairs fda trials cra gcp hipaa bachelors">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Clinical Research</span>
+                  <span class="card-id">CR-01</span>
+                </div>
+                <h4 class="job-title">Clinical Research & Regulatory Affairs</h4>
+                <p class="job-summary">Protects patient safety by managing human clinical trials and serving as the primary liaison navigating drugs through FDA approval onto the commercial market.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Education Needed</span>
+                    <p class="meta-value">Bachelor's in Life Sciences + 1,500 to 3,000 hours in human subjects research. Advanced knowledge of GCP & HIPAA required.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $49,700/yr | <strong>Median:</strong> $108,971/yr | <strong>Senior:</strong> $192,400/yr
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Focus Areas:</h5>
+                  <p class="day-text"><strong>Regulatory Affairs (RA):</strong> Oversees FDA reviews and drug submissions.<br><strong>Clinical Research:</strong> Direct patient trial execution and health outcome tracking.</p>
+                  <p class="source-link"><a href="https://www.fda.gov/science-research/science-and-research-special-topics/advancing-regulatory-science" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> FDA Regulatory Science Guide</a></p>
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Mornings involve study recruitment, patient scheduling, and progress meetings. Afternoons shift to internal quality audits, electronic data capture, protocol reviews, and evening scientific journal reading.</p>
+                </div>
+              </article>
+
+              <!-- Clinical Card 2 -->
+              <article class="job-card theme-clinical" data-keywords="clinical research coordinator crc pi principal investigator bachelors patient care">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Clinical Research</span>
+                  <span class="card-id">CR-02</span>
+                </div>
+                <h4 class="job-title">Clinical Research Coordinator (CRC)</h4>
+                <p class="job-summary">Works directly under the Principal Investigator (PI) to manage daily clinical trial operations, patient visits, compliance, and study device/medication tracking.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Education Needed</span>
+                    <p class="meta-value">Bachelor's in science or medical field (nursing, public health, medical tech) + 2 years hands-on experience or internships.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $45,000–$55,000 | <strong>Median:</strong> $60,000–$70,000 | <strong>Senior:</strong> $75,000–$90,000
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">CRCs arrive early to prep study kits, review appointment schedules, dispense trial medications according to strict protocol, coordinate with patients, and log data for study sponsors.</p>
+                </div>
+              </article>
+
+              <!-- Clinical Card 3 -->
+              <article class="job-card theme-clinical" data-keywords="pharmacovigilance specialist icsr adr drug safety fda ema bachelors md phd">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Clinical Research</span>
+                  <span class="card-id">CR-03</span>
+                </div>
+                <h4 class="job-title">Pharmacovigilance Specialist</h4>
+                <p class="job-summary">Monitors and reports the safety profiles of drugs and biologics by investigating Individual Case Study Reports (ICSRs) and adverse drug reactions (ADRs).</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Education Needed</span>
+                    <p class="meta-value">Bachelor's degree in healthcare/science field. Advanced roles prefer MD, MS, or PhD.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $53,991–$65,120 | <strong>Median:</strong> $96,145–$123,670 | <strong>Senior:</strong> $135,647–$173,138
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Evaluates safety databases, reviews clinical trial reports, logs patient adverse events, determines if reactions are expected vs. unexpected, and files regulatory safety submissions with global authorities like the FDA or EMA.</p>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <!-- COLUMN 3: RESEARCH & DEVELOPMENT -->
+          <div class="sector-column col-rd" data-category="rd">
+            <div class="column-header">
+              <div class="col-icon"><i class="fa-solid fa-vial-virus"></i></div>
+              <h3>Research & Development</h3>
+              <span class="col-count">3 Roles</span>
+            </div>
+
+            <div class="column-cards">
+
+              <!-- R&D Card 1 -->
+              <article class="job-card theme-rd" data-keywords="preclinical discovery research drug testing assays pcr cell culture bachelors ms phd">
+                <div class="job-card-header">
+                  <span class="job-category-tag">R&D Discovery</span>
+                  <span class="card-id">RD-01</span>
+                </div>
+                <h4 class="job-title">Preclinical Discovery Research</h4>
+                <p class="job-summary">Identifies, tests, and optimizes new drug candidates using cellular models and laboratory assays to evaluate efficacy and toxicity before human testing.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Degree Needed</span>
+                    <p class="meta-value">Entry: B.S. in Biology, Biochemistry, or Biotechnology.<br>Advanced: M.S. (3-5 yrs lab exp) or Ph.D. in Pharmacology.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $60,000–$83,000 | <strong>Median:</strong> $103,000–$125,000 | <strong>Senior:</strong> $150,000–$180,000+
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Spends full days in wet labs performing PCR assays, maintaining cell cultures, administering test doses in disease models, processing raw experimental data with analytical software, and keeping FDA-compliant lab notebooks.</p>
+                </div>
+              </article>
+
+              <!-- R&D Card 2 -->
+              <article class="job-card theme-rd" data-keywords="bioinformatics genomic coding python r algorithms computer science bachelors ms phd">
+                <div class="job-card-header">
+                  <span class="job-category-tag">R&D Discovery</span>
+                  <span class="card-id">RD-02</span>
+                </div>
+                <h4 class="job-title">Bioinformatics</h4>
+                <p class="job-summary">Combines computer science, statistics, and genomics to build computational pipelines, analyze genetic sequence data, and discover therapeutic targets.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Degree Needed</span>
+                    <p class="meta-value">Entry: B.S. in Bioinformatics, Computer Science, or Data Science.<br>Senior: M.S. or Ph.D. with programming expertise.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $70,000–$90,000 | <strong>Median:</strong> $105,000–$130,000 | <strong>Senior:</strong> $155,000–$195,000+
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Writes code (Python/R) to parse biological datasets, models drug-body interactions, queries genomic databases, and meets with wet-lab scientists to translate computational findings into research next steps.</p>
+                </div>
+              </article>
+
+              <!-- R&D Card 3 -->
+              <article class="job-card theme-rd" data-keywords="lab safety health environmental ehs biosafety osha bachelors ms">
+                <div class="job-card-header">
+                  <span class="job-category-tag">R&D Discovery</span>
+                  <span class="card-id">RD-03</span>
+                </div>
+                <h4 class="job-title">Lab Safety Professional</h4>
+                <p class="job-summary">Oversees health, regulatory, and environmental safety across research labs to ensure teams handle chemical and biological samples safely.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Degree Needed</span>
+                    <p class="meta-value">Entry: B.S. in Environmental Health & Safety, Occupational Health, Biology, or Chemistry.<br>Senior: M.S. in Industrial Hygiene or Public Health.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $55,000–$75,000 | <strong>Median:</strong> $85,000–$105,000 | <strong>Senior:</strong> $120,000–$165,000+
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Inspects research equipment and biosafety cabinets, conducts chemical risk assessments for new experiments, leads safety orientation for new scientists, and responds to facility incidents.</p>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <!-- COLUMN 4: OPERATIONS -->
+          <div class="sector-column col-ops" data-category="ops">
+            <div class="column-header">
+              <div class="col-icon"><i class="fa-solid fa-gears"></i></div>
+              <h3>Operations</h3>
+              <span class="col-count">2 Roles</span>
+            </div>
+
+            <div class="column-cards">
+
+              <!-- Ops Card 1 -->
+              <article class="job-card theme-ops" data-keywords="process product development scaling bioprocess engineering bachelors">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Operations</span>
+                  <span class="card-id">OP-01</span>
+                </div>
+                <h4 class="job-title">Process / Product Development</h4>
+                <p class="job-summary">Translates early laboratory bench concepts into scalable, cost-effective, and reproducible commercial manufacturing methods for therapeutics.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Degree Needed</span>
+                    <p class="meta-value">Degree in Biotechnology, Bioprocess Engineering, Molecular Biology, or Chemistry.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $90,000–$115,000 | <strong>Median:</strong> $92,300–$106,700 | <strong>Senior:</strong> $120,000–$160,000+
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Optimizes fermentation conditions, cell growth yields, and purification steps to scale lab biological drug discovery into high-volume manufacturing lines.</p>
+                </div>
+              </article>
+
+              <!-- Ops Card 2 -->
+              <article class="job-card theme-ops" data-keywords="manufacturing production bioreactor cleanroom sop cgmp high school associate bachelors">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Operations</span>
+                  <span class="card-id">OP-02</span>
+                </div>
+                <h4 class="job-title">Manufacturing / Production</h4>
+                <p class="job-summary">Operates specialized bioprocessing equipment like bioreactors and filtration units in regulated cleanrooms to produce vaccines and medicines.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Degree Needed</span>
+                    <p class="meta-value">Bachelor's in Science/Engineering. <em>*Entry-level roles may accept an Associate Degree or High School Diploma.</em></p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $45,000–$60,000 | <strong>Median:</strong> $65,000–$85,000 | <strong>Senior:</strong> $110,000–$150,000+
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Works inside cleanrooms adhering to Standard Operating Procedures (SOPs) and cGMP standards, cleans and sterilizes bioreactor vessels, dispenses biological raw materials, and coordinates with quality assurance.</p>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <!-- COLUMN 5: FINANCE AND ADMINISTRATION -->
+          <div class="sector-column col-finadmin" data-category="finadmin">
+            <div class="column-header">
+              <div class="col-icon"><i class="fa-solid fa-chart-line"></i></div>
+              <h3>Finance & Administration</h3>
+              <span class="col-count">4 Roles</span>
+            </div>
+
+            <div class="column-cards">
+
+              <!-- FinAdmin Card 1 -->
+              <article class="job-card theme-finadmin" data-keywords="administration executive scheduling office management high school bachelors">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Finance & Admin</span>
+                  <span class="card-id">FA-01</span>
+                </div>
+                <h4 class="job-title">Administration</h4>
+                <p class="job-summary">Coordinates daily corporate operations, scheduling, research budgets, lab supply procurement, and compliance documentation for biotech organizations.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Degree Needed</span>
+                    <p class="meta-value">High School Diploma/GED required. Minimum Bachelor's in Business, Administration, or Life Sciences preferred.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $48,562/yr | <strong>Median:</strong> $72,585/yr | <strong>Senior:</strong> $108,491/yr
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Reviews executive and scientist schedules, processes specialized supply orders, coordinates travel itineraries for scientific conferences, and manages compliance documentation for auditing visits.</p>
+                </div>
+              </article>
+
+              <!-- FinAdmin Card 2 -->
+              <article class="job-card theme-finadmin" data-keywords="legal ip patents juris doctor jd bar exam contract law">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Finance & Admin</span>
+                  <span class="card-id">FA-02</span>
+                </div>
+                <h4 class="job-title">Biotech Legal Counsel</h4>
+                <p class="job-summary">Manages intellectual property (IP), drafts patent strategies, negotiates corporate technology licensing, and navigates FDA legal liabilities.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Degree Needed</span>
+                    <p class="meta-value">Juris Doctor (JD) Degree + State Bar Admission with expertise in biotechnology IP and contract law.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $33,000/yr | <strong>Median:</strong> $57,731/yr | <strong>Senior:</strong> $89,000/yr
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Advises business units on legal risk, researches upcoming legislative policies, manages lease agreements and patent databases, and reviews licensing agreements for scientific commercialization.</p>
+                </div>
+              </article>
+
+              <!-- FinAdmin Card 3 -->
+              <article class="job-card theme-finadmin" data-keywords="finance accounting budgeting venture capital bachelors masters">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Finance & Admin</span>
+                  <span class="card-id">FA-03</span>
+                </div>
+                <h4 class="job-title">Biotech Finance</h4>
+                <p class="job-summary">Manages financial capital, R&D burn rates, clinical trial budgeting, venture funding grants, and accounting operations across drug pipelines.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Degree Needed</span>
+                    <p class="meta-value">Bachelor's in Finance, Accounting, Business, or Economics. Minor in biology/biotech is advantageous; Master's preferred for senior roles.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $55,000–$75,000 | <strong>Median:</strong> $75,000–$105,000 | <strong>Senior:</strong> $105,000–$135,000+
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Tracks fast-moving R&D cash burn rates, reviews vendor invoices, collaborates with scientific project leads to update project budgets, and evaluates capital allocation for lab equipment.</p>
+                </div>
+              </article>
+
+              <!-- FinAdmin Card 4 -->
+              <article class="job-card theme-finadmin" data-keywords="business development partnerships mergers licensing mba phd bachelors">
+                <div class="job-card-header">
+                  <span class="job-category-tag">Finance & Admin</span>
+                  <span class="card-id">FA-04</span>
+                </div>
+                <h4 class="job-title">Business Development</h4>
+                <p class="job-summary">Drives corporate growth through strategic industry partnerships, technology licensing deals, mergers, and investor relations.</p>
+                
+                <div class="job-meta-block">
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-graduation-cap"></i> Degree Needed</span>
+                    <p class="meta-value">Bachelor's in Life Sciences or Business/Finance. Hybrid background favored; MBA or Ph.D. preferred for senior roles.</p>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label"><i class="fa-solid fa-sack-dollar"></i> Salary</span>
+                    <p class="meta-value">
+                      <strong>Entry:</strong> $85,000–$115,000 | <strong>Median:</strong> $125,000–$165,000 | <strong>Senior:</strong> $175,000–$240,000+
+                    </p>
+                  </div>
+                </div>
+
+                <div class="job-details-expand">
+                  <h5>Day-to-Day Life:</h5>
+                  <p class="day-text">Evaluates clinical trial data with R&D teams, constructs financial valuation models for drug assets, pitches to pharma partners, negotiates licensing deal terms, and manages investor relationships.</p>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <h3>BioPath<span>.</span></h3>
+            <p>High School & Graduate Biotechnology Guidance</p>
+          </div>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="biotechnology.html">What is Biotech</a>
+            <a href="careers.html">Search Careers</a>
+            <a href="programs.html">Programs</a>
+            <a href="internship.html">Internships</a>
+            <a href="maps.html">Maps</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 BioPath Initiative. Built for High School Graduates & Educators.</p>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
