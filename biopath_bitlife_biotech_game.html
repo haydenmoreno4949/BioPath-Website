@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioPath: Life & Career Simulator</title>
+    <title>BioPath: Biotech Life Simulator</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Lora (Headings) & Open Sans (Body) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -18,15 +18,15 @@
             theme: {
                 extend: {
                     colors: {
-                        bioDark: '#1b4332',      /* Dark Green */
-                        bioTan: '#d4a373',       /* Tan Accent */
-                        bioTanLight: '#e2ded4',  /* Light Tan */
-                        bioCream: '#f9f7f1',     /* Cream Background */
-                        bioGold: '#d4af37',      /* Gold Accent */
-                        bioBrown: '#582f0e',     /* Brown Text/Accent */
-                        bioGray: '#f0f0f0',      /* Light Gray */
-                        bioPink: '#f8edeb',      /* Light Pink Accent */
-                        bioSlate: '#334155'
+                        bioDark: '#1b4332',
+                        bioMedium: '#2d6a4f',
+                        bioLight: '#52b788',
+                        bioCream: '#f9f7f1',
+                        bioCard: '#ffffff',
+                        bioAccent: '#d4af37',
+                        bioAccentHover: '#b89628',
+                        bioText: '#2c3e50',
+                        bioMuted: '#6c757d'
                     },
                     fontFamily: {
                         heading: ['Lora', 'serif'],
@@ -38,30 +38,25 @@
     </script>
 
     <style>
-        :root {
-            --font-scale: 1rem;
-        }
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: #f9f7f1;
-            color: #334155;
-            font-size: var(--font-scale);
+            background-color: #f2efe9;
+            color: #2c3e50;
             user-select: none;
-            -webkit-user-select: none;
         }
         h1, h2, h3, h4, .font-heading {
             font-family: 'Lora', serif;
         }
-        /* Custom scrollbars */
+        /* Custom scrollbar for BitLife timeline feed */
         ::-webkit-scrollbar {
             width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #f0f0f0;
+            background: #e9ecef;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #1b4332;
+            background: #2d6a4f;
             border-radius: 4px;
         }
         .bitlife-btn {
@@ -71,253 +66,162 @@
             transform: scale(0.97);
         }
         .pulse-subtle {
-            animation: pulseGlow 2.5s infinite;
+            animation: pulseGlow 2s infinite;
         }
         @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(27, 67, 50, 0.4); }
-            50% { box-shadow: 0 0 0 12px rgba(27, 67, 50, 0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.25s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* High Contrast Mode CSS */
-        .high-contrast {
-            background-color: #000000 !important;
-            color: #ffffff !important;
-        }
-        .high-contrast .bg-white,
-        .high-contrast .bg-bioCream,
-        .high-contrast .bg-bioPink,
-        .high-contrast .bg-bioTanLight {
-            background-color: #121212 !important;
-            color: #ffffff !important;
-            border-color: #444444 !important;
-        }
-        .high-contrast .text-bioDark,
-        .high-contrast .text-bioSlate,
-        .high-contrast .text-bioBrown {
-            color: #ffffff !important;
-        }
-        .high-contrast .bg-bioDark {
-            background-color: #1b4332 !important;
-            border-color: #d4af37 !important;
+            0%, 100% { box-shadow: 0 0 0 0 rgba(45, 106, 79, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(45, 106, 79, 0); }
         }
     </style>
 </head>
-<body id="mainBody" class="min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 md:p-6 bg-bioCream text-bioSlate transition-colors duration-200">
+<body class="min-h-screen flex flex-col justify-between items-center p-2 sm:p-4 md:p-6">
 
-    <!-- GAME MAIN CONTAINER -->
-    <div id="gameContainer" class="w-full max-w-2xl bg-white rounded-2xl shadow-2xl border-2 border-bioDark/30 overflow-hidden flex flex-col my-auto relative min-h-[740px] max-h-[95vh]">
+    <!-- Game Container Window -->
+    <div class="w-full max-w-2xl bg-bioCream rounded-2xl shadow-2xl border-2 border-bioDark/20 overflow-hidden flex flex-col my-auto relative min-h-[680px]">
 
-        <!-- HEADER WITH CIRCULAR LOGO & REQUIRED SUBTITLE -->
-        <header class="bg-bioDark text-white px-3 sm:px-5 py-3 flex justify-between items-center border-b-4 border-bioGold relative z-10 shadow-md">
+        <!-- TOP BAR: BioPath Branding & Audio Toggle -->
+        <header class="bg-bioDark text-white px-5 py-3.5 flex justify-between items-center border-b-4 border-bioAccent">
             <div class="flex items-center gap-3">
-                <!-- Circular Logo -->
-                <div class="w-12 h-12 rounded-full bg-bioCream text-bioDark flex flex-col items-center justify-center font-heading font-bold border-2 border-bioGold shadow-inner leading-none text-center p-1 shrink-0">
-                    <span class="text-sm font-black text-bioDark tracking-tight">BP</span>
-                    <span class="text-[7px] uppercase font-bold tracking-tighter text-bioBrown">BioPath</span>
+                <div class="w-10 h-10 rounded-full bg-bioCream text-bioDark flex items-center justify-center font-heading font-bold text-xl border-2 border-bioAccent shadow">
+                    BP
                 </div>
                 <div>
-                    <h1 class="font-heading font-bold text-base sm:text-xl tracking-wide leading-tight text-white flex items-center gap-2">
-                        BioPath <span class="text-xs bg-bioGold text-bioDark px-2 py-0.5 rounded-full font-sans font-bold">Simulator</span>
-                    </h1>
-                    <!-- REQUIRED SUBTITLE TEXT -->
-                    <p class="text-[10px] sm:text-[11px] text-bioTanLight tracking-tight font-medium">
-                        BioPath. The Reliable Biotech Career Site - New Jersey - Since 2026
-                    </p>
+                    <h1 class="font-heading font-bold text-lg sm:text-xl tracking-wide leading-tight">BioPath</h1>
+                    <p class="text-[11px] text-bioCream/80 uppercase tracking-wider font-semibold">Biotech Life Simulator • NJ Edition</p>
                 </div>
             </div>
-
-            <!-- HEADER UTILITIES & ACCESSIBILITY CONTROLS -->
-            <div class="flex items-center gap-1.5 sm:gap-2">
-                <!-- Font Resizer Buttons -->
-                <div class="hidden sm:flex items-center bg-bioDark/80 border border-bioGold/40 rounded-lg overflow-hidden">
-                    <button onclick="adjustFontSize(-0.05)" class="px-2 py-1 text-xs hover:bg-white/10 text-bioGold" title="Decrease Font Size">A-</button>
-                    <span class="text-[10px] text-bioTanLight px-1">Font</span>
-                    <button onclick="adjustFontSize(0.05)" class="px-2 py-1 text-xs hover:bg-white/10 text-bioGold" title="Increase Font Size">A+</button>
-                </div>
-                <!-- High Contrast Toggle -->
-                <button onclick="toggleHighContrast()" class="text-xs bg-bioDark hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-bioGold border border-bioGold/50 transition flex items-center gap-1" title="Toggle Contrast">
-                    <i class="fas fa-adjust"></i>
-                </button>
-                <!-- Audio Toggle -->
-                <button id="soundToggleBtn" onclick="toggleSound()" class="text-xs bg-bioDark hover:bg-white/10 px-2.5 py-1.5 rounded-lg text-bioGold border border-bioGold/50 transition flex items-center gap-1" title="Toggle Audio">
+            <div class="flex items-center gap-2">
+                <button id="soundToggleBtn" onclick="toggleSound()" class="text-xs bg-bioMedium hover:bg-bioLight/30 px-3 py-1.5 rounded-full text-white border border-white/20 transition flex items-center gap-1.5" title="Toggle Sound">
                     <i id="soundIcon" class="fas fa-volume-up"></i>
+                    <span class="hidden sm:inline">Audio</span>
                 </button>
-                <!-- Restart Simulation Button -->
-                <button onclick="restartGame(true)" class="text-xs bg-bioBrown hover:bg-amber-900 px-2.5 py-1.5 rounded-lg text-white border border-bioGold/50 transition flex items-center gap-1" title="Restart Life">
-                    <i class="fas fa-redo-alt"></i>
+                <button onclick="restartGame(true)" class="text-xs bg-red-800/60 hover:bg-red-800 px-3 py-1.5 rounded-full text-white border border-white/20 transition" title="Restart Game">
+                    <i class="fas fa-redo-alt sm:mr-1"></i><span class="hidden sm:inline">Reset</span>
                 </button>
             </div>
         </header>
 
-        <!-- PLAYER PROFILE BAR & 4 DYNAMIC STAT BARS -->
-        <section id="profileBar" class="bg-bioCream border-b border-bioTanLight px-4 py-3 shadow-inner hidden">
-            <!-- Top Profile Stats Row -->
-            <div class="flex flex-wrap justify-between items-center gap-2 mb-2.5">
-                <div class="flex items-center gap-2.5">
-                    <span id="playerAvatar" class="text-3xl bg-white p-1.5 rounded-full border border-bioTan shadow-sm">🧑‍🔬</span>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <h2 id="playerNameDisplay" class="font-heading font-bold text-base sm:text-lg text-bioDark leading-none">Alex Morgan</h2>
-                            <span id="playerAgeBadge" class="bg-bioDark text-bioGold text-xs px-2.5 py-0.5 rounded-full font-bold">Age 18</span>
-                        </div>
-                        <p id="playerStatusLine" class="text-xs text-bioSlate mt-0.5 font-medium">High School Graduate • Unemployed</p>
+        <!-- PROFILE STATUS BAR -->
+        <section id="profileBar" class="bg-white border-b border-gray-200 px-4 py-3 shadow-inner hidden">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span id="playerAvatar" class="text-2xl">🎓</span>
+                        <h2 id="playerNameDisplay" class="font-heading font-bold text-lg text-bioDark leading-none">Student Name</h2>
+                        <span id="playerAgeBadge" class="bg-bioDark text-white text-xs px-2 py-0.5 rounded-full font-bold">Age 18</span>
                     </div>
+                    <p id="playerStatusLine" class="text-xs text-bioMuted mt-0.5">High School Senior • Unemployed</p>
                 </div>
-
-                <!-- Financial Balance & Debt Card -->
-                <div class="flex gap-2">
-                    <div class="bg-white px-3 py-1 rounded-xl border border-bioTan shadow-sm text-right">
-                        <div class="text-[9px] uppercase tracking-wider text-bioDark font-bold">Bank Cash</div>
-                        <div id="playerFunds" class="font-bold text-emerald-700 text-sm sm:text-base font-mono">$5,000</div>
-                    </div>
-                    <div class="bg-bioPink px-3 py-1 rounded-xl border border-red-200 shadow-sm text-right">
-                        <div class="text-[9px] uppercase tracking-wider text-red-800 font-bold">Student Debt</div>
-                        <div id="playerDebt" class="font-bold text-red-700 text-sm sm:text-base font-mono">$0</div>
-                    </div>
+                <div class="text-left sm:text-right bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200 w-full sm:w-auto">
+                    <div class="text-[10px] uppercase tracking-wider text-emerald-800 font-bold">Bank Balance</div>
+                    <div id="playerFunds" class="font-bold text-emerald-700 text-base font-mono">$5,000</div>
                 </div>
             </div>
 
-            <!-- 4 STAT BARS REQUIRED BY MECHANICS DOCUMENT -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-bioTanLight text-xs">
-                <!-- 1. Happiness -->
-                <div class="bg-white p-1.5 rounded-lg border border-bioTanLight">
-                    <div class="flex justify-between text-[11px] font-semibold text-bioDark mb-0.5">
-                        <span><i class="fas fa-smile text-amber-500 mr-1"></i>Happiness</span>
-                        <span id="statHappinessVal">80%</span>
+            <!-- BITLIFE STAT BARS -->
+            <div class="grid grid-cols-3 gap-2 pt-1 border-t border-gray-100 text-xs">
+                <!-- Science Knowledge -->
+                <div>
+                    <div class="flex justify-between text-[11px] font-semibold text-gray-600 mb-0.5">
+                        <span><i class="fas fa-microscope text-bioMedium mr-1"></i>Knowledge</span>
+                        <span id="statKnowledgeVal">50%</span>
                     </div>
-                    <div class="w-full bg-bioGray rounded-full h-2 overflow-hidden">
-                        <div id="statHappinessBar" class="bg-amber-500 h-2 rounded-full transition-all duration-300" style="width: 80%"></div>
-                    </div>
-                </div>
-
-                <!-- 2. Health -->
-                <div class="bg-white p-1.5 rounded-lg border border-bioTanLight">
-                    <div class="flex justify-between text-[11px] font-semibold text-bioDark mb-0.5">
-                        <span><i class="fas fa-heartbeat text-emerald-600 mr-1"></i>Health</span>
-                        <span id="statHealthVal">90%</span>
-                    </div>
-                    <div class="w-full bg-bioGray rounded-full h-2 overflow-hidden">
-                        <div id="statHealthBar" class="bg-emerald-600 h-2 rounded-full transition-all duration-300" style="width: 90%"></div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                        <div id="statKnowledgeBar" class="bg-bioMedium h-2 rounded-full transition-all duration-300" style="width: 50%"></div>
                     </div>
                 </div>
-
-                <!-- 3. Smarts / Knowledge -->
-                <div class="bg-white p-1.5 rounded-lg border border-bioTanLight">
-                    <div class="flex justify-between text-[11px] font-semibold text-bioDark mb-0.5">
-                        <span><i class="fas fa-brain text-purple-600 mr-1"></i>Smarts</span>
-                        <span id="statKnowledgeVal">55%</span>
+                <!-- Network & Reputation -->
+                <div>
+                    <div class="flex justify-between text-[11px] font-semibold text-gray-600 mb-0.5">
+                        <span><i class="fas fa-users text-blue-600 mr-1"></i>Network</span>
+                        <span id="statNetworkVal">30%</span>
                     </div>
-                    <div class="w-full bg-bioGray rounded-full h-2 overflow-hidden">
-                        <div id="statKnowledgeBar" class="bg-purple-600 h-2 rounded-full transition-all duration-300" style="width: 55%"></div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                        <div id="statNetworkBar" class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: 30%"></div>
                     </div>
                 </div>
-
-                <!-- 4. Experience / Professional Standing -->
-                <div class="bg-white p-1.5 rounded-lg border border-bioTanLight">
-                    <div class="flex justify-between text-[11px] font-semibold text-bioDark mb-0.5">
-                        <span><i class="fas fa-briefcase text-bioDark mr-1"></i>Experience</span>
-                        <span id="statExperienceVal">10%</span>
+                <!-- Health & Energy -->
+                <div>
+                    <div class="flex justify-between text-[11px] font-semibold text-gray-600 mb-0.5">
+                        <span><i class="fas fa-heartbeat text-rose-500 mr-1"></i>Energy</span>
+                        <span id="statEnergyVal">80%</span>
                     </div>
-                    <div class="w-full bg-bioGray rounded-full h-2 overflow-hidden">
-                        <div id="statExperienceBar" class="bg-bioDark h-2 rounded-full transition-all duration-300" style="width: 10%"></div>
+                    <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                        <div id="statEnergyBar" class="bg-rose-500 h-2 rounded-full transition-all duration-300" style="width: 80%"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- MAIN VIEW SCREEN AREA -->
-        <main class="flex-1 flex flex-col p-3 sm:p-4 overflow-hidden relative">
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 flex flex-col p-4 overflow-hidden relative">
 
-            <!-- 1. WELCOME & START SCREEN (FIRST PERSON POV PROMPT) -->
-            <div id="screenStart" class="flex-1 flex flex-col justify-center items-center text-center p-3 my-auto">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-bioDark text-bioGold flex items-center justify-center text-3xl sm:text-4xl mb-3 border-4 border-bioGold shadow-xl">
+            <!-- 1. START GAME SCREEN -->
+            <div id="screenStart" class="flex-1 flex flex-col justify-center items-center text-center p-4">
+                <div class="w-20 h-20 rounded-full bg-bioDark text-bioAccent flex items-center justify-center text-4xl mb-4 border-4 border-bioAccent shadow-lg">
                     🧬
                 </div>
-                <h2 class="font-heading text-xl sm:text-2xl font-bold text-bioDark mb-2">BioPath: Life & Career Simulator</h2>
-                
-                <!-- FIRST-PERSON POV WELCOME PROMPT -->
-                <div class="bg-bioCream p-4 rounded-xl border border-bioTan max-w-md mb-5 text-left text-xs sm:text-sm text-bioSlate leading-relaxed shadow-sm">
-                    <p class="font-semibold text-bioDark mb-1">🎓 Welcome to your BioPath Journey!</p>
-                    <p>
-                        You are graduating high school in New Jersey. As you step into adulthood, your career trajectory will be defined by the choices you make today. Will you go to college to pursue specialized biotech majors or step directly into the workforce?
-                    </p>
-                </div>
+                <h2 class="font-heading text-2xl sm:text-3xl font-bold text-bioDark mb-2">Welcome to BioPath</h2>
+                <p class="text-sm text-gray-600 max-w-md mb-6 leading-relaxed">
+                    Step into the shoes of a high school student in New Jersey exploring careers in Biotechnology! Make decisions about college, enter the workforce, handle real-world challenges, and build your dream biotech career.
+                </p>
 
-                <div class="w-full max-w-sm bg-white p-4 sm:p-5 rounded-2xl border-2 border-bioTan shadow-md text-left mb-5 space-y-3">
+                <div class="w-full max-w-sm bg-white p-5 rounded-xl border border-gray-200 shadow-sm text-left mb-6 space-y-3">
                     <div>
-                        <label class="block text-xs font-bold text-bioDark uppercase mb-1">Enter Character Name</label>
-                        <input type="text" id="inputName" placeholder="Alex Morgan" value="Alex Morgan" class="w-full px-3.5 py-2 border border-bioTanLight rounded-xl focus:outline-none focus:ring-2 focus:ring-bioDark text-sm font-semibold">
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Your Name</label>
+                        <input type="text" id="inputName" placeholder="Alex Morgan" value="Alex Morgan" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-bioMedium text-sm">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-bioDark uppercase mb-1">Starting Life Point</label>
-                        <div class="text-xs text-bioDark bg-bioCream p-2.5 rounded-xl border border-bioTan flex items-center gap-2.5">
-                            <i class="fas fa-graduation-cap text-bioDark text-lg"></i>
-                            <div>
-                                <div class="font-bold">Age 18 • High School Senior</div>
-                                <div class="text-[11px] text-bioSlate">Graduating in New Jersey • Ready to decide path</div>
-                            </div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Starting Life Path</label>
+                        <div class="text-xs text-gray-500 bg-emerald-50 p-2.5 rounded-lg border border-emerald-100 flex items-center gap-2">
+                            <i class="fas fa-graduation-cap text-bioMedium text-lg"></i>
+                            <span>Age 18 • High School Senior Graduating in New Jersey</span>
                         </div>
                     </div>
                 </div>
 
-                <button onclick="startGame()" class="bitlife-btn bg-bioDark hover:bg-emerald-900 text-white font-bold px-7 py-3 rounded-xl text-sm sm:text-base shadow-xl border-2 border-bioGold pulse-subtle flex items-center gap-2">
-                    <i class="fas fa-play text-bioGold"></i> Begin BioPath Life Path
+                <button onclick="startGame()" class="bitlife-btn bg-bioDark hover:bg-bioMedium text-white font-bold px-8 py-3.5 rounded-xl text-base shadow-lg border border-bioAccent pulse-subtle flex items-center gap-2">
+                    <i class="fas fa-play text-bioAccent"></i> Begin Biotech Life Path
                 </button>
             </div>
 
-            <!-- 2. MAIN GAMEPLAY TIMELINE & ACTION DASHBOARD -->
+            <!-- 2. GAMEPLAY SCREEN: BITLIFE FEED + CONTROLS -->
             <div id="screenGame" class="flex-1 flex flex-col hidden h-full overflow-hidden">
                 
-                <!-- CENTRAL INTERACTIVE TIMELINE LOG FEED -->
-                <div id="timelineFeed" class="flex-1 overflow-y-auto bg-bioCream rounded-xl border border-bioTanLight p-3 sm:p-4 space-y-3 shadow-inner mb-3">
-                    <!-- Dynamic age logs appended here -->
+                <!-- LIFE TIMELINE LOG FEED -->
+                <div id="timelineFeed" class="flex-1 overflow-y-auto bg-white rounded-xl border border-gray-200 p-4 space-y-3 shadow-inner mb-3">
+                    <!-- Dynamic timeline logs injected here -->
                 </div>
 
-                <!-- CONTROLS & AGE-UP BOARD -->
-                <div id="gameActionBar" class="bg-white p-3 rounded-2xl border-2 border-bioTanLight flex flex-col gap-2.5 shadow-md">
+                <!-- BOTTOM ACTION BAR -->
+                <div id="gameActionBar" class="bg-gray-100 p-2.5 rounded-xl border border-gray-300 flex flex-col gap-2">
                     
-                    <!-- PROMINENT "+ AGE (NEXT YEAR)" BUTTON -->
-                    <button id="btnAgeUp" onclick="advanceYear()" class="bitlife-btn w-full bg-bioDark hover:bg-emerald-900 text-white font-heading font-bold text-base sm:text-lg py-3 rounded-xl shadow-lg border-2 border-bioGold flex items-center justify-center gap-2.5">
-                        <i class="fas fa-plus-circle text-bioGold text-lg sm:text-xl"></i>
-                        <span>+ AGE (Next Year)</span>
+                    <!-- BIG AGE UP BUTTON -->
+                    <button id="btnAgeUp" onclick="advanceYear()" class="bitlife-btn w-full bg-bioDark hover:bg-bioMedium text-white font-heading font-bold text-lg py-3 rounded-xl shadow-md border-2 border-bioAccent flex items-center justify-center gap-3">
+                        <i class="fas fa-plus-circle text-bioAccent text-xl"></i>
+                        <span>+ AGE UP (Next Year)</span>
                     </button>
 
                     <!-- SECONDARY ACTIONS GRID -->
-                    <div class="grid grid-cols-5 gap-1 text-xs">
-                        <!-- 1. Work / Career Actions -->
-                        <button onclick="openWorkMenu()" class="bitlife-btn bg-bioCream hover:bg-bioTanLight/50 text-bioDark font-bold py-2 px-1 rounded-xl border border-bioTan flex flex-col items-center justify-center gap-1 shadow-sm">
-                            <i class="fas fa-briefcase text-bioDark text-base"></i>
-                            <span class="truncate w-full text-center text-[10px]">Work & Jobs</span>
+                    <div class="grid grid-cols-4 gap-1.5 text-xs">
+                        <button onclick="openEducationModal()" class="bitlife-btn bg-white hover:bg-emerald-50 text-bioDark font-semibold py-2 px-1 rounded-lg border border-gray-200 flex flex-col items-center justify-center gap-1 shadow-sm">
+                            <i class="fas fa-university text-bioMedium text-base"></i>
+                            <span class="truncate w-full text-center">Education</span>
                         </button>
 
-                        <!-- 2. Education Actions -->
-                        <button onclick="openEducationModal()" class="bitlife-btn bg-bioCream hover:bg-bioTanLight/50 text-bioDark font-bold py-2 px-1 rounded-xl border border-bioTan flex flex-col items-center justify-center gap-1 shadow-sm">
-                            <i class="fas fa-university text-bioDark text-base"></i>
-                            <span class="truncate w-full text-center text-[10px]">Education</span>
+                        <button onclick="openJobsModal()" class="bitlife-btn bg-white hover:bg-emerald-50 text-bioDark font-semibold py-2 px-1 rounded-lg border border-gray-200 flex flex-col items-center justify-center gap-1 shadow-sm">
+                            <i class="fas fa-briefcase text-bioMedium text-base"></i>
+                            <span class="truncate w-full text-center">Jobs/Careers</span>
                         </button>
 
-                        <!-- 3. NJ Internships & Research -->
-                        <button onclick="openActivitiesModal()" class="bitlife-btn bg-bioCream hover:bg-bioTanLight/50 text-bioDark font-bold py-2 px-1 rounded-xl border border-bioTan flex flex-col items-center justify-center gap-1 shadow-sm">
-                            <i class="fas fa-vial text-bioDark text-base"></i>
-                            <span class="truncate w-full text-center text-[10px]">NJ Fellowships</span>
+                        <button onclick="openActivitiesModal()" class="bitlife-btn bg-white hover:bg-emerald-50 text-bioDark font-semibold py-2 px-1 rounded-lg border border-gray-200 flex flex-col items-center justify-center gap-1 shadow-sm">
+                            <i class="fas fa-vial text-bioMedium text-base"></i>
+                            <span class="truncate w-full text-center">Activities</span>
                         </button>
 
-                        <!-- 4. Lifestyle & Self-Care -->
-                        <button onclick="openLifestyleMenu()" class="bitlife-btn bg-bioCream hover:bg-bioTanLight/50 text-bioDark font-bold py-2 px-1 rounded-xl border border-bioTan flex flex-col items-center justify-center gap-1 shadow-sm">
-                            <i class="fas fa-heart text-bioDark text-base"></i>
-                            <span class="truncate w-full text-center text-[10px]">Self-Care</span>
-                        </button>
-
-                        <!-- 5. Reflection Summary -->
-                        <button onclick="openSummaryModal()" class="bitlife-btn bg-bioCream hover:bg-bioTanLight/50 text-bioDark font-bold py-2 px-1 rounded-xl border border-bioTan flex flex-col items-center justify-center gap-1 shadow-sm">
-                            <i class="fas fa-scroll text-bioDark text-base"></i>
-                            <span class="truncate w-full text-center text-[10px]">Reflection</span>
+                        <button onclick="openSummaryModal()" class="bitlife-btn bg-white hover:bg-emerald-50 text-bioDark font-semibold py-2 px-1 rounded-lg border border-gray-200 flex flex-col items-center justify-center gap-1 shadow-sm">
+                            <i class="fas fa-scroll text-bioMedium text-base"></i>
+                            <span class="truncate w-full text-center">Summary</span>
                         </button>
                     </div>
                 </div>
@@ -326,408 +230,330 @@
 
         </main>
 
-        <!-- FOOTER -->
-        <footer class="bg-bioCream text-bioSlate/80 text-[11px] text-center py-2 px-4 border-t border-bioTanLight flex justify-between items-center">
-            <span>BioPath Simulation Engine • New Jersey Edition</span>
-            <span id="currentYearFooter" class="font-bold text-bioDark">Year 2026</span>
+        <!-- FOOTER: Credits -->
+        <footer class="bg-gray-100 text-gray-500 text-[11px] text-center py-2 px-4 border-t border-gray-200 flex justify-between items-center">
+            <span>BioPath • Academy of ACIS</span>
+            <span id="currentYearFooter">Year 2026</span>
         </footer>
 
     </div>
 
-    <!-- SYSTEM POPUP MODAL DIALOG CONTAINER -->
-    <div id="gameModalOverlay" class="fixed inset-0 bg-bioDark/70 backdrop-blur-sm z-50 flex items-center justify-center p-3 hidden">
+    <!-- MODAL POPUP DIALOG SYSTEM -->
+    <div id="gameModalOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 hidden">
         <div class="bg-white rounded-2xl shadow-2xl border-2 border-bioDark w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh] animate-fade-in">
             <!-- Modal Header -->
-            <div id="modalHeader" class="bg-bioDark text-white px-5 py-3.5 flex justify-between items-center border-b-2 border-bioGold">
-                <h3 id="modalTitle" class="font-heading font-bold text-base sm:text-lg flex items-center gap-2">
-                    <i id="modalIcon" class="fas fa-star text-bioGold"></i>
-                    <span>Life Event</span>
+            <div id="modalHeader" class="bg-bioDark text-white px-5 py-3.5 flex justify-between items-center border-b-2 border-bioAccent">
+                <h3 id="modalTitle" class="font-heading font-bold text-lg flex items-center gap-2">
+                    <i id="modalIcon" class="fas fa-star text-bioAccent"></i>
+                    <span>Life Choice</span>
                 </h3>
-                <button id="modalCloseBtn" onclick="closeModal()" class="text-bioTanLight hover:text-white text-lg w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/10 hidden">
+                <button id="modalCloseBtn" onclick="closeModal()" class="text-gray-300 hover:text-white text-lg w-7 h-7 flex items-center justify-center rounded-full hover:bg-white/10 hidden">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             
             <!-- Modal Body -->
-            <div id="modalBody" class="p-4 sm:p-5 overflow-y-auto space-y-3 text-xs sm:text-sm leading-relaxed flex-1">
-                <!-- Dynamically populated content -->
+            <div id="modalBody" class="p-5 overflow-y-auto space-y-4 text-sm leading-relaxed flex-1">
+                <!-- Content inserted dynamically -->
             </div>
 
-            <!-- Modal Footer -->
-            <div id="modalFooter" class="p-3 sm:p-4 bg-bioCream border-t border-bioTanLight flex flex-col sm:flex-row gap-2 justify-end">
-                <!-- Dynamically populated action buttons -->
+            <!-- Modal Footer Controls -->
+            <div id="modalFooter" class="p-4 bg-gray-50 border-t border-gray-200 flex flex-col sm:flex-row gap-2 justify-end">
+                <!-- Buttons inserted dynamically -->
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT ENGINE & LOGIC -->
+    <!-- JAVASCRIPT GAME ENGINE -->
     <script>
         /* ==========================================================================
-           1. COMPLETE DEGREES DATASET (ALL 20 DEGREES)
+           GAME DATA STRUCTURES & DEFINITIONS
            ========================================================================== */
-        const ALL_20_DEGREES = [
-            { id: "biology", name: "Cellular & Molecular Biology", category: "Life Science", desc: "Cellular biology, molecular genetics, and foundational biological research methodologies." },
-            { id: "biotech", name: "Applied Biotechnology", category: "Applied Science", desc: "Applied biological systems, DNA cloning, recombinant proteins, and bioprocess technology." },
-            { id: "chemistry", name: "Medicinal & Bio-Chemistry", category: "Physical Science", desc: "Organic synthesis, pharmaceutical assay development, analytical chromatography, and structural chemistry." },
-            { id: "engineering", name: "Biomedical & Biochemical Engineering", category: "Engineering", desc: "Biochemical engineering, automated bioreactors, bio-hardware, and fluid bioprocessing." },
-            { id: "microbiology", name: "Microbiology & Molecular Biology", category: "Life Science", desc: "Microbial genetics, biological pathogen cultures, and cellular mechanisms." },
-            { id: "compsci", name: "Biological Computer Science", category: "Computational", desc: "Software engineering for biological systems, genomic database architecture, and molecular algorithms." },
-            { id: "biochemistry", name: "Structural Biochemistry", category: "Life Science", desc: "Enzyme kinetics, metabolic pathways, macromolecular biology, and structural protein assays." },
-            { id: "bioinformatics", name: "Bioinformatics & Sequence Analysis", category: "Computational", desc: "Computational tools for analyzing high-throughput genomic and protein sequence datasets." },
-            { id: "compbio", name: "Computational Biology & Systems Biology", category: "Computational", desc: "Mathematical modeling, biological network simulations, and biophysical algorithms." },
-            { id: "biostats", name: "Biostatistics & Biometrics", category: "Computational", desc: "Statistical theory applied to biological research, epidemiology, and biopharmaceutical clinical trials." },
-            { id: "genomics", name: "Functional Genomics & Gene Editing", category: "Life Science", desc: "Next-generation sequencing, CRISPR-Cas9 gene editing, and cellular genomics." },
-            { id: "datascience", name: "Bio-Data Science & Health Analytics", category: "Computational", desc: "Big biological data analytics, machine learning for drug discovery, and predictive bio-modeling." },
-            { id: "ehs", name: "Biosafety & Hazardous Material Management", category: "Safety", desc: "Biohazard safety containment, chemical hazard protocols, and OSHA/CDC biosafety compliance." },
-            { id: "occhealth", name: "Bio-Industrial Occupational Health", category: "Safety", desc: "Industrial hygiene in biomanufacturing, lab occupational wellness, and cleanroom biosecurity." },
-            { id: "envscience", name: "Environmental Biotechnology", category: "Environmental", desc: "Environmental bioremediation, industrial bio-ecology, and biological waste management." },
-            { id: "bizadmin", name: "Biotech Enterprise Management", category: "Business", desc: "Biotechnology corporate operations, biopharma supply chains, and life science leadership." },
-            { id: "accounting", name: "Biopharma Accounting & R&D Auditing", category: "Business", desc: "R&D tax credits, biopharma capital auditing, and regulatory financial compliance." },
-            { id: "economics", name: "Health Economics & Bio-Pharma Markets", category: "Economics", desc: "Pharmaco-economics, biological drug pricing models, and healthcare market dynamics." },
-            { id: "finance", name: "Biotech Venture Capital & Life Science Finance", category: "Finance", desc: "Biotech venture capital valuation, clinical trial cash flow, and biopharma asset management." },
-            { id: "jd", name: "Biotech Patent Law & IP Juris Doctor", category: "Legal", desc: "Post-graduate legal study in biological patent prosecution, genetic IP licensing, and FDA regulatory law.", isGraduate: true }
+
+        // DEGREE OPTIONS FROM REQUIREMENTS DOC
+        const DEGREES_LIST = [
+            { id: "biology", name: "Biology", category: "Life Science", desc: "Fundamental biological sciences, research, and laboratory methods." },
+            { id: "biotech", name: "Biotechnology", category: "Life Science", desc: "Applied biological systems, genetic engineering, and biomanufacturing." },
+            { id: "chemistry", name: "Chemistry", category: "Physical Science", desc: "Chemical structures, analytical chemistry, and formulation sciences." },
+            { id: "microbiology", name: "Microbiology / Molecular Biology", category: "Life Science", desc: "Cellular mechanisms, genetics, cellular assays, and microbes." },
+            { id: "biochemistry", name: "Biochemistry", category: "Life Science", desc: "Chemical processes within living organisms and protein synthesis." },
+            { id: "bioinformatics", name: "Bioinformatics", category: "Computational", desc: "Computational techniques to analyze genetic & molecular data." },
+            { id: "compbio", name: "Computational Biology", category: "Computational", desc: "Algorithmic modeling of complex biological systems." },
+            { id: "biostats", name: "Biostatistics", category: "Computational", desc: "Statistical methodology for clinical trials and epidemiology." },
+            { id: "genomics", name: "Genomics", category: "Life Science", desc: "Genome sequencing, gene mapping, and molecular genetics." },
+            { id: "datascience", name: "Data Science", category: "Computational", desc: "Large data processing, machine learning, and predictive modeling." },
+            { id: "ehs", name: "Environmental Health & Safety", category: "Environmental", desc: "Occupational safety standards, biohazards, and lab compliance." },
+            { id: "occhealth", name: "Occupational Health", category: "Environmental", desc: "Workplace health protection and hazardous material protocols." },
+            { id: "envscience", name: "Environmental Science", category: "Environmental", desc: "Ecosystem impacts, industrial waste management, and sustainability." },
+            { id: "finance", name: "Finance", category: "Business", desc: "Corporate valuation, venture capital, and financial forecasting." },
+            { id: "bizadmin", name: "Business Administration", category: "Business", desc: "Operations, organizational management, and biotech leadership." },
+            { id: "accounting", name: "Accounting", category: "Business", desc: "Financial reporting, auditing, and corporate budget tracking." },
+            { id: "economics", name: "Economics", category: "Business", desc: "Market dynamics, healthcare economics, and pricing strategy." },
+            { id: "engineering", name: "Engineering", category: "Engineering", desc: "Process, chemical, mechanical, and bioprocess engineering." },
+            { id: "compsci", name: "Computer Science", category: "Computational", desc: "Software engineering, database architecture, and algorithms." },
+            { id: "jd", name: "Juris Doctor Degree (Law)", category: "Legal", desc: "Post-graduate law degree, patent law, regulatory compliance, and bar exam.", reqGrad: true }
         ];
 
-        /* ==========================================================================
-           2. CAREERS DATASET (18 CAREERS: 4 HS/ASSOCIATE + 14 DEGREE-GATED)
-           ========================================================================== */
-        const ALL_CAREERS = [
-            // WORKFORCE / HIGH SCHOOL / ASSOCIATE CAREERS (4)
+        // CAREER PATHS & JOB REQUIREMENTS FROM DOC
+        const JOBS_DATABASE = [
+            // High School / Associate Degree Jobs
             {
-                id: "mfg_support",
-                title: "Biomanufacturing Support Associate",
+                id: "qc_tech",
+                title: "Quality Control Technician",
                 minEducation: "highschool",
                 allowedDegrees: [],
-                salaryTier: { entry: 36000, median: 42000, senior: 62000 },
-                category: "Operations",
-                desc: "Assists biomanufacturing operators with material staging, cleanroom prep, and bioreactor sanitization.",
-                dayInLife: "Weigh biological growth media, transport cell tanks, and complete cGMP batch logbooks."
+                entrySalary: 38000,
+                medianSalary: 48000,
+                seniorSalary: 75000,
+                category: "Quality",
+                desc: "Inspects raw materials and uses specialized testing equipment to ensure biotech products meet safety standards.",
+                dayInLife: "Inspect raw materials, maintain LIMS documentation, and test batch consistency."
             },
             {
                 id: "facility_maint",
-                title: "Bio-Facility & Cleanroom Maintenance Tech",
+                title: "Facility Maintenance Support",
                 minEducation: "highschool",
                 allowedDegrees: [],
-                salaryTier: { entry: 38000, median: 45000, senior: 68000 },
+                entrySalary: 36000,
+                medianSalary: 45000,
+                seniorSalary: 68000,
                 category: "Operations",
-                desc: "Maintains bioprocessing utility systems, sterile cleanroom HVAC filtration, and biological autoclaves.",
-                dayInLife: "Perform preventative maintenance on bioreactor steam lines and verify HEPA cleanroom pressure balance."
+                desc: "Maintains cleanrooms, HVAC units, bioprocessing utility systems, and facility safety.",
+                dayInLife: "Conduct routine preventative maintenance on bioreactor systems and cleanroom HVACs."
             },
             {
                 id: "lab_assistant",
-                title: "Biotech Laboratory Assistant",
+                title: "Basic Laboratory Assistant",
                 minEducation: "highschool",
                 allowedDegrees: [],
-                salaryTier: { entry: 34000, median: 40000, senior: 58000 },
+                entrySalary: 35000,
+                medianSalary: 42000,
+                seniorSalary: 60000,
                 category: "Research",
-                desc: "Prepares buffer solutions, sterilizes specialized biological lab glassware, and manages cell culture supplies.",
-                dayInLife: "Autoclave surgical lab tools, prepare standard buffer reagents, and restock biosafety cabinets."
+                desc: "Prepares lab reagents, cleans specialized glassware, sterilizes autoclaves, and supports researchers.",
+                dayInLife: "Stock inventory, prepare buffer solutions, and sanitize biosafety hoods."
             },
             {
-                id: "qc_tech",
-                title: "Bio-Quality Control Technician",
+                id: "mfg_support",
+                title: "Manufacturing Support Associate",
                 minEducation: "highschool",
                 allowedDegrees: [],
-                salaryTier: { entry: 38000, median: 48000, senior: 75000 },
-                category: "Quality",
-                desc: "Tests raw chemical materials and biological drug samples to ensure strict compliance with cGMP standards.",
-                dayInLife: "Perform pH, protein purity, & turbidity assays on batch samples and log results into LIMS software."
+                entrySalary: 36000,
+                medianSalary: 44000,
+                seniorSalary: 65000,
+                category: "Operations",
+                desc: "Assists biomanufacturing operators with material staging, equipment cleaning, and logbook entries.",
+                dayInLife: "Weigh raw ingredients and transport cell culture media to cleanroom suites."
             },
 
-            // POST-GRADUATE DEGREE GATED CAREERS (14)
+            // Bachelor's or Higher Jobs
             {
                 id: "qc_assurance",
-                title: "Biotech Quality Assurance Specialist",
+                title: "Quality Control & Assurance Analyst",
                 minEducation: "bachelors",
                 allowedDegrees: ["biology", "biotech", "chemistry", "microbiology", "biochemistry", "engineering", "genomics", "envscience"],
-                salaryTier: { entry: 54200, median: 71252, senior: 80400 },
+                entrySalary: 54200,
+                medianSalary: 71252,
+                seniorSalary: 80400,
                 category: "Quality",
-                desc: "Executes release testing and compliance audits for cell therapies and biological drugs under cGMP rules.",
-                dayInLife: "Conduct analytical HPLC assays in a cleanroom and review cell therapy batch documentation."
+                desc: "Executes testing for CAR-T cell therapies and biopharma products under cGMP regulations.",
+                dayInLife: "Perform analytical assays in a controlled CGMP cleanroom and write peer laboratory data reviews."
             },
             {
                 id: "quality_engineer",
-                title: "Bioprocess Quality Engineer",
+                title: "Quality Engineer",
                 minEducation: "bachelors",
                 allowedDegrees: ["engineering"],
-                salaryTier: { entry: 78700, median: 102597, senior: 152128 },
+                entrySalary: 78700,
+                medianSalary: 102597,
+                seniorSalary: 152128,
                 category: "Quality",
-                desc: "Designs biomanufacturing processes, validation protocols, and automated bio-quality management systems.",
-                dayInLife: "Analyze bioreactor failure modes (FMEA) and validate automated sterile filling robotics."
+                desc: "Designs processes, testing procedures, and systems to ensure products meet stringent standards.",
+                dayInLife: "Conduct process audits, analyze equipment quality risks, and interface with manufacturing developers."
             },
             {
                 id: "clinical_research_reg",
-                title: "Biopharma Clinical & Regulatory Specialist",
+                title: "Clinical Research & Regulatory Affairs Specialist",
                 minEducation: "bachelors",
                 allowedDegrees: ["biology", "biotech", "microbiology", "biochemistry", "genomics", "occhealth"],
-                salaryTier: { entry: 49700, median: 108971, senior: 192400 },
+                entrySalary: 49700,
+                medianSalary: 108971,
+                seniorSalary: 192400,
                 category: "Clinical",
-                desc: "Manages FDA investigational biological drug submissions (INDs) and ensures clinical trial safety compliance.",
-                dayInLife: "Draft regulatory filing dossiers for novel therapeutics and liaise with FDA review teams."
+                desc: "Oversees drug clinical trial safety and liaises with FDA regulators to secure drug approvals.",
+                dayInLife: "Coordinate FDA review filings, audit clinical trial site compliance, and analyze trial outcome metrics."
             },
             {
                 id: "crc",
-                title: "Biomedical Clinical Research Coordinator",
+                title: "Clinical Research Coordinator (CRC)",
                 minEducation: "bachelors",
                 allowedDegrees: ["biology", "biotech", "microbiology", "biochemistry", "occhealth", "chemistry"],
-                salaryTier: { entry: 45000, median: 65000, senior: 90000 },
+                entrySalary: 45000,
+                medianSalary: 65000,
+                seniorSalary: 90000,
                 category: "Clinical",
-                desc: "Coordinates daily biopharmaceutical clinical trial operations at medical research centers.",
-                dayInLife: "Enroll trial participants, collect biological specimens, and log drug efficacy data."
+                desc: "Coordinates daily clinical trial activities under the Principal Investigator (PI) directly with patients.",
+                dayInLife: "Prep study kit materials, track protocol compliance, and manage patient clinical visit data."
             },
             {
                 id: "pharmacovigilance",
-                title: "Pharmacovigilance & Bio-Safety Specialist",
+                title: "Pharmacovigilance Specialist",
                 minEducation: "bachelors",
                 allowedDegrees: ["biology", "biotech", "microbiology", "biochemistry", "occhealth", "chemistry"],
-                salaryTier: { entry: 53991, median: 109900, senior: 173138 },
+                entrySalary: 53991,
+                medianSalary: 109900,
+                seniorSalary: 173138,
                 category: "Clinical",
-                desc: "Monitors, evaluates, and reports adverse biologic drug reactions to FDA safety registries.",
-                dayInLife: "Review post-market biological drug reaction reports and flag safety trends to regulatory bodies."
+                desc: "Monitors, assesses, and reports adverse drug reactions (ADRs) to protect public safety.",
+                dayInLife: "Evaluate Individual Case Safety Reports (ICSRs) and flag potential drug safety concerns to FDA databases."
             },
             {
                 id: "preclinical_discovery",
-                title: "Preclinical Biotech Discovery Researcher",
+                title: "Preclinical Discovery Researcher",
                 minEducation: "bachelors",
                 allowedDegrees: ["biology", "biotech", "biochemistry", "microbiology", "genomics"],
-                salaryTier: { entry: 60000, median: 114000, senior: 180000 },
+                entrySalary: 60000,
+                medianSalary: 114000,
+                seniorSalary: 180000,
                 category: "R&D",
-                desc: "Identifies novel therapeutic drug targets using cellular assays and disease models prior to clinical trials.",
-                dayInLife: "Perform CRISPR gene editing assays, run fluorescence microscopy, and analyze cell culture data."
+                desc: "Finds and tests novel drug candidates in cell culture and animal models prior to human testing.",
+                dayInLife: "Run PCRs and cell culture assays, process raw experimental data, and keep FDA-compliant lab notebooks."
             },
             {
                 id: "bioinformatics_specialist",
-                title: "Bioinformatics & Genomic Specialist",
+                title: "Bioinformatics Specialist",
                 minEducation: "bachelors",
                 allowedDegrees: ["bioinformatics", "compbio", "compsci", "datascience", "biostats"],
-                salaryTier: { entry: 70000, median: 117500, senior: 195000 },
+                entrySalary: 70000,
+                medianSalary: 117500,
+                seniorSalary: 195000,
                 category: "R&D",
-                desc: "Develops computational algorithms to analyze large-scale DNA sequencing and transcriptomic data.",
-                dayInLife: "Write Python scripts to identify disease-causing genetic mutations in patient RNA-seq data."
+                desc: "Combines computer science, statistics, and genetics to build pipelines for genomic datasets.",
+                dayInLife: "Write Python/R algorithms to search genomic databases and interpret biomarker targets for wet-lab scientists."
             },
             {
                 id: "lab_safety_officer",
-                title: "Biosafety & EHS Officer",
+                title: "Lab Safety & EHS Officer",
                 minEducation: "bachelors",
                 allowedDegrees: ["ehs", "occhealth", "biology", "chemistry", "envscience"],
-                salaryTier: { entry: 55000, median: 95000, senior: 165000 },
+                entrySalary: 55000,
+                medianSalary: 95000,
+                seniorSalary: 165000,
                 category: "Safety",
-                desc: "Oversees biological safety containment, biohazardous waste disposal, and OSHA/CDC compliance.",
-                dayInLife: "Conduct biological spill containment drills, inspect biosafety cabinets, and train lab researchers."
+                desc: "Oversees chemical and biological lab safety, biosafety cabinets, and regulatory compliance.",
+                dayInLife: "Inspect research labs for proper chemical storage, train new scientists, and audit biosafety protocol."
             },
             {
                 id: "process_development",
-                title: "Bioprocess Development Scientist",
+                title: "Process & Product Development Scientist",
                 minEducation: "bachelors",
                 allowedDegrees: ["biotech", "chemistry", "microbiology", "biochemistry", "engineering"],
-                salaryTier: { entry: 62000, median: 99500, senior: 160000 },
+                entrySalary: 90000,
+                medianSalary: 99500,
+                seniorSalary: 160000,
                 category: "Operations",
-                desc: "Scales cellular drug manufacturing techniques from benchtop shake flasks to industrial bioreactors.",
-                dayInLife: "Optimize media nutrient feeds in 500-Liter bioreactors to maximize recombinant antibody yields."
+                desc: "Creates scalable manufacturing methods to take biological drugs from lab bench to mass production.",
+                dayInLife: "Optimize bioprocess yield in benchtop bioreactors and scale up viral vector manufacturing lines."
             },
             {
                 id: "manufacturing_production",
-                title: "Biomanufacturing & Cell Therapy Specialist",
+                title: "Manufacturing & Bioproduction Specialist",
                 minEducation: "bachelors",
                 allowedDegrees: ["biology", "biotech", "chemistry", "engineering", "microbiology", "biochemistry"],
-                salaryTier: { entry: 45000, median: 75000, senior: 150000 },
+                entrySalary: 45000,
+                medianSalary: 75000,
+                seniorSalary: 150000,
                 category: "Operations",
-                desc: "Operates cleanroom biomanufacturing equipment for protein purification and CAR-T cell therapies.",
-                dayInLife: "Operate tangential flow filtration systems and execute aseptic cell harvest in cleanrooms."
+                desc: "Operates industrial bioreactors, filtration equipment, and harvest systems to manufacture biological drugs.",
+                dayInLife: "Operate cleanroom bioreactors, sterilize harvesting vessels, and follow strict cGMP procedures."
             },
             {
                 id: "biotech_admin",
-                title: "Biotech Operations & Admin Manager",
+                title: "Biotech Administration Manager",
                 minEducation: "bachelors",
                 allowedDegrees: ["bizadmin", "finance", "accounting", "economics", "biology", "biotech"],
-                salaryTier: { entry: 48562, median: 72585, senior: 108491 },
+                entrySalary: 48562,
+                medianSalary: 72585,
+                seniorSalary: 108491,
                 category: "Admin",
-                desc: "Manages day-to-day biotech facility operations, lab vendor contracts, and research equipment leasing.",
-                dayInLife: "Coordinate multi-million dollar bioreactor lease contracts and manage laboratory supply logistics."
+                desc: "Coordinates administrative, vendor, facility scheduling, and executive operations for biotech labs.",
+                dayInLife: "Manage specialized lab equipment purchases, organize auditor visits, and oversee office operations."
             },
             {
                 id: "biotech_legal",
-                title: "Biotech Patent & IP Legal Counsel",
+                title: "Biotech Legal & IP Counsel",
                 minEducation: "jd",
                 allowedDegrees: ["jd"],
-                salaryTier: { entry: 85000, median: 157731, senior: 220000 },
+                entrySalary: 85000,
+                medianSalary: 157731,
+                seniorSalary: 220000,
                 category: "Legal",
-                desc: "Drafts patent applications for biological molecules, handles gene-tech IP licensing, and manages litigation.",
-                dayInLife: "Protect CRISPR gene-editing patent portfolios and negotiate biotech technology transfer agreements."
+                desc: "Navigates patent applications, drug licensing contracts, intellectual property, and FDA legal affairs.",
+                dayInLife: "Draft patent filings for novel gene editing tools and advise executives on licensing agreements."
             },
             {
                 id: "finance_associate",
-                title: "Biotech & Biopharma Finance Associate",
+                title: "Biotech Finance Associate",
                 minEducation: "bachelors",
                 allowedDegrees: ["finance", "accounting", "bizadmin", "economics"],
-                salaryTier: { entry: 55000, median: 90000, senior: 135000 },
+                entrySalary: 55000,
+                medianSalary: 90000,
+                seniorSalary: 135000,
                 category: "Finance",
-                desc: "Manages financial cash flow, R&D tax credits, and clinical trial budgets for biopharma companies.",
-                dayInLife: "Model financial cash burn rates for Phase III oncology clinical trials and present grant reports."
+                desc: "Manages financial cash burn, clinical trial capital budgets, R&D grants, and financial forecasting.",
+                dayInLife: "Track R&D cash burn rates, forecast clinical phase III expenditures, and present budget reports."
             },
             {
                 id: "business_development",
-                title: "Biotech Business Development Manager",
+                title: "Business Development Manager",
                 minEducation: "bachelors",
                 allowedDegrees: ["biology", "biotech", "finance", "bizadmin", "economics"],
-                salaryTier: { entry: 85000, median: 145000, senior: 240000 },
+                entrySalary: 85000,
+                medianSalary: 145000,
+                seniorSalary: 240000,
                 category: "Business",
-                desc: "Negotiates corporate biological drug licensing, pharma co-development deals, and venture funding.",
-                dayInLife: "Pitch cell therapy assets to life science venture capital investors and structure licensing agreements."
+                desc: "Drives growth through corporate partnerships, technology licensing, mergers, and venture deals.",
+                dayInLife: "Build financial models for drug asset licensing, negotiate venture terms, and pitch to investment partners."
             }
         ];
 
-        /* ==========================================================================
-           3. REAL NJ INTERNSHIPS & OPPORTUNITIES
-           ========================================================================== */
+        // NEW JERSEY INTERNSHIPS & EXTRACURRICULARS (Requirements PDF)
         const INTERNSHIPS_NJ = [
-            { id: "caldwell", name: "Caldwell University Biotech Fellowship", location: "Caldwell, NJ", cost: -1800, reqSmarts: 50, statGain: { smarts: 18, experience: 15, happiness: 5 }, desc: "Intensive summer research fellowship in cancer biology and cellular assays." },
-            { id: "lsc", name: "Liberty Science Center - Partners in Science", location: "Jersey City, NJ", cost: 0, stipend: 600, reqSmarts: 55, statGain: { smarts: 22, experience: 20, happiness: 10 }, desc: "8-week summer research pairing students with professional industry mentors." },
-            { id: "wise", name: "Rutgers WISE (Waksman Institute Summer Experience)", location: "Piscataway, NJ", cost: -2200, reqSmarts: 60, statGain: { smarts: 25, experience: 18, happiness: 8 }, desc: "Analyze novel gene sequences and publish DNA sequence data directly to GenBank." },
-            { id: "s2s", name: "Students 2 Science (S2S) Mentorship", location: "Whippany / Newark, NJ", cost: 0, stipend: 300, reqSmarts: 40, statGain: { smarts: 15, experience: 22, happiness: 12 }, desc: "Work alongside industry professionals in state-of-the-art analytical chemistry labs." }
+            { name: "Caldwell University Biotech Research Fellowship", location: "Caldwell, NJ", cost: -1800, statGain: { knowledge: 15, network: 10 }, desc: "Hands-on intensive research fellowship in cancer biology and neuroscience." },
+            { name: "Liberty Science Center - Partners in Science", location: "Jersey City, NJ", cost: 0, stipend: 500, statGain: { knowledge: 20, network: 15 }, desc: "8-week summer intensive paired with professional biotech research mentors." },
+            { name: "Passaic County DNA Learning Center Camp", location: "Wayne, NJ", cost: -650, statGain: { knowledge: 12, network: 5 }, desc: "Advanced lab camp utilizing genetic engineering and molecular tools." },
+            { name: "Rutgers Waksman Institute Summer Experience (WISE)", location: "Piscataway, NJ", cost: -2200, statGain: { knowledge: 22, network: 15 }, desc: "Analyze gene sequences and publish novel DNA fragments on GenBank!" },
+            { name: "Students 2 Science Lab Mentorship", location: "Whippany / Newark, NJ", cost: 0, statGain: { knowledge: 10, network: 15 }, desc: "Work alongside industry STEM professionals in state-of-the-art analytical labs." },
+            { name: "Rutgers THED Program (Toxicology & Disease)", location: "Piscataway, NJ", cost: -973, statGain: { knowledge: 14, network: 8 }, desc: "Explores molecular genetics, drug disposition, and clinical toxicology." }
         ];
 
         /* ==========================================================================
-           4. BIOTECH INTERACTIVE SCENARIOS & DILEMMAS (BITLIFE STYLE)
-           ========================================================================== */
-        const ANNUAL_SCENARIOS = [
-            {
-                id: "cgmp_audit",
-                title: "cGMP Cleanroom Inspection",
-                icon: "fa-clipboard-check",
-                desc: "During an unannounced FDA cleanroom audit, you notice a subtle calibration drift on the primary bioreactor sensor. Your shift ends in 10 minutes.",
-                choices: [
-                    {
-                        text: "Report it immediately to the Audit Lead",
-                        effect: { smarts: 5, experience: 8, happiness: -5, log: "Flagged a cleanroom sensor drift during audit (+Experience, +Smarts)." }
-                    },
-                    {
-                        text: "Adjust it quietly yourself",
-                        effect: { smarts: 3, experience: 2, log: "Quietly recalibrated the bioreactor sensor." }
-                    },
-                    {
-                        text: "Leave it for the next shift crew",
-                        effect: { happiness: 5, health: -5, log: "Ignored the calibration issue. Audit noted a minor variance." }
-                    }
-                ]
-            },
-            {
-                id: "conference_invite",
-                title: "Princeton Biotech Leadership Summit",
-                icon: "fa-users",
-                desc: "You have been invited to present a poster on cell therapy optimization at the NJ Bio Conference in Princeton. Registration & travel costs $400.",
-                choices: [
-                    {
-                        text: "Pay $400 & present your research",
-                        effect: { funds: -400, experience: 15, smarts: 8, happiness: 10, log: "Presented poster at NJ Bio Conference in Princeton (-$400, +15% Experience)." }
-                    },
-                    {
-                        text: "Decline to stay home and rest",
-                        effect: { health: 8, happiness: 5, log: "Skipped the conference to rest and recover (+Health)." }
-                    }
-                ]
-            },
-            {
-                id: "crunch_overtime",
-                title: "Urgent Clinical Batch Deadline",
-                icon: "fa-stopwatch",
-                desc: "The biomanufacturing team is running behind schedule for Phase II trial production. Your manager asks for 20 hours of mandatory overtime this week.",
-                choices: [
-                    {
-                        text: "Work the overtime enthusiastically",
-                        effect: { funds: 1200, experience: 10, health: -10, happiness: -8, log: "Worked 20 hrs overtime (+ $1,200 pay, -10% Health)." }
-                    },
-                    {
-                        text: "Respectfully decline to maintain balance",
-                        effect: { happiness: 5, health: 5, experience: -2, log: "Declined overtime to prioritize personal health." }
-                    }
-                ]
-            },
-            {
-                id: "headhunter_call",
-                title: "Rival Biotech Headhunter Offer",
-                icon: "fa-phone-alt",
-                desc: "A recruiter from a Cambridge, MA biotech startup reaches out offering 20% higher pay, but requires moving and longer hours.",
-                choices: [
-                    {
-                        text: "Leverage the offer to ask your current boss for a raise",
-                        effect: { smarts: 5, salaryPct: 0.08, log: "Leveraged job offer to negotiate an 8% salary raise at current company!" }
-                    },
-                    {
-                        text: "Decline and stay loyal to your NJ team",
-                        effect: { happiness: 8, log: "Declined rival offer to remain with your New Jersey team." }
-                    }
-                ]
-            },
-            {
-                id: "lab_breakthrough",
-                title: "Cell Assay Data Breakthrough",
-                icon: "fa-microscope",
-                desc: "Your latest cell culture experiment yielded a 300% increase in protein expression yields! How do you handle this data?",
-                choices: [
-                    {
-                        text: "Draft a paper for publication & file patent",
-                        effect: { smarts: 12, experience: 12, happiness: 15, log: "Published landmark cell assay findings in a peer-reviewed journal!" }
-                    },
-                    {
-                        text: "Keep it internal to strengthen company IP",
-                        effect: { experience: 8, funds: 800, log: "Kept data proprietary, receiving a company performance bonus." }
-                    }
-                ]
-            },
-            {
-                id: "wellness_burnout",
-                title: "Cleanroom Shift Fatigue",
-                icon: "fa-bed",
-                desc: "Months of continuous cleanroom gowning and strict protocols are causing physical and mental fatigue.",
-                choices: [
-                    {
-                        text: "Take a week of paid wellness leave",
-                        effect: { happiness: 20, health: 15, funds: -300, log: "Took a restorative week of wellness leave (+20% Happiness, +15% Health)." }
-                    },
-                    {
-                        text: "Push through with extra coffee",
-                        effect: { health: -15, smarts: 3, log: "Pushed through burnout (-15% Health)." }
-                    }
-                ]
-            }
-        ];
-
-        /* ==========================================================================
-           5. GAME STATE ENGINE
+           GAME STATE
            ========================================================================== */
         let state = {
             name: "Alex Morgan",
             age: 18,
             year: 2026,
             funds: 5000,
-            debt: 0,
+            knowledge: 50,
+            network: 30,
+            energy: 80,
             
-            // 4 STAT BARS
-            happiness: 80,
-            health: 90,
-            smarts: 55,
-            experience: 10,
-            
-            educationLevel: "highschool", // "highschool", "undergrad", "bachelors", "jd"
+            educationLevel: "highschool", // "highschool", "undergrad_in_progress", "bachelors", "jd"
             major: null, // Degree object
-            collegeYear: 0,
-            hasPassedBarExam: false,
+            collegeYear: 0, // 1 to 4
+            hasLawDegree: false,
             
             currentJob: null, // Job object
-            careerLevel: "entry", // "entry", "median", "senior"
             careerYears: 0,
             salary: 0,
-            jobPerformance: 60,
             
-            decisionLog: [], // Explicit Choice Reflection Log
-            timeline: [],
-            soundEnabled: true,
-            fontScale: 1.0,
-            highContrast: false
+            lifeLog: [], // Array of text events
+            decisionsMade: [], // History tree
+            soundEnabled: true
         };
 
-        // WEB AUDIO SYNTHESIZER FOR SOUND EFFECTS
+        // AUDIO GENERATOR (Web Audio API - No external files needed)
         let audioCtx = null;
         function playChime(type = "normal") {
             if (!state.soundEnabled) return;
@@ -740,28 +566,27 @@
                 
                 const now = audioCtx.currentTime;
                 if (type === "success") {
-                    osc.frequency.setValueAtTime(523.25, now);
-                    osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.15);
-                    osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.3);
-                    gain.gain.setValueAtTime(0.12, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
-                    osc.start(now);
-                    osc.stop(now + 0.35);
-                } else if (type === "level") {
                     osc.frequency.setValueAtTime(440, now);
-                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.3);
+                    osc.frequency.exponentialRampToValueAtTime(880, now + 0.25);
                     gain.gain.setValueAtTime(0.15, now);
-                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
                     osc.start(now);
-                    osc.stop(now + 0.35);
+                    osc.stop(now + 0.25);
+                } else if (type === "level") {
+                    osc.frequency.setValueAtTime(300, now);
+                    osc.frequency.exponentialRampToValueAtTime(600, now + 0.4);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                    osc.start(now);
+                    osc.stop(now + 0.4);
                 } else {
-                    osc.frequency.setValueAtTime(320, now);
+                    osc.frequency.setValueAtTime(350, now);
                     gain.gain.setValueAtTime(0.08, now);
                     gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
                     osc.start(now);
                     osc.stop(now + 0.15);
                 }
-            } catch (e) { }
+            } catch (e) { console.log("Audio not allowed yet"); }
         }
 
         function toggleSound() {
@@ -770,19 +595,10 @@
             icon.className = state.soundEnabled ? "fas fa-volume-up" : "fas fa-volume-mute";
         }
 
-        function adjustFontSize(delta) {
-            state.fontScale = Math.max(0.85, Math.min(1.25, state.fontScale + delta));
-            document.documentElement.style.fontSize = `${state.fontScale * 16}px`;
-        }
-
-        function toggleHighContrast() {
-            state.highContrast = !state.highContrast;
-            document.getElementById("gameContainer").classList.toggle("high-contrast", state.highContrast);
-        }
-
         /* ==========================================================================
-           6. GAME INITIALIZATION & START LOGIC
+           ENGINE LOGIC
            ========================================================================== */
+
         function startGame() {
             const inputName = document.getElementById("inputName").value.trim();
             if (inputName) state.name = inputName;
@@ -791,276 +607,258 @@
             document.getElementById("screenGame").classList.remove("hidden");
             document.getElementById("profileBar").classList.remove("hidden");
 
-            // Initial feed entries
-            addTimelineEvent(`🎉 <b>${state.name}</b> graduated High School in New Jersey at age 18!`, "fa-graduation-cap", "grad");
-            addTimelineEvent(`🧬 Time to choose your path: Pursue a College Degree or enter the Workforce directly!`, "fa-compass", "info");
+            // Initial log entry
+            addLogEvent(`🎉 Welcome, <b>${state.name}</b>! You have just graduated from High School in New Jersey at age 18.`, "grad");
+            addLogEvent(`🎓 It's time to choose your future path in Biotechnology!`, "info");
 
             updateUI();
             playChime("level");
 
-            // FIRST-PERSON POV DECISION PROMPT
-            setTimeout(promptHighSchoolGraduationChoice, 400);
+            // Trigger Graduation Choice
+            setTimeout(() => {
+                promptHighSchoolGraduationChoice();
+            }, 600);
         }
 
         function updateUI() {
             document.getElementById("playerNameDisplay").textContent = state.name;
             document.getElementById("playerAgeBadge").textContent = `Age ${state.age}`;
             document.getElementById("playerFunds").textContent = `$${state.funds.toLocaleString()}`;
-            document.getElementById("playerDebt").textContent = `$${state.debt.toLocaleString()}`;
             document.getElementById("currentYearFooter").textContent = `Year ${state.year}`;
 
-            // Status Line Text
+            // Status Line
             let statusText = "";
             if (state.educationLevel === "highschool") {
                 statusText = "High School Graduate";
-            } else if (state.educationLevel === "undergrad") {
+            } else if (state.educationLevel === "undergrad_in_progress") {
                 statusText = `College Undergrad (Yr ${state.collegeYear}/4) • ${state.major ? state.major.name : "Declared Major"}`;
             } else if (state.educationLevel === "bachelors") {
                 statusText = `B.S. in ${state.major ? state.major.name : "Science"}`;
             } else if (state.educationLevel === "jd") {
-                statusText = `Juris Doctor (J.D.) & B.S. in ${state.major ? state.major.name : "Science"}`;
+                statusText = `Juris Doctor (J.D. Law) & B.S. ${state.major ? state.major.name : ''}`;
             }
 
             if (state.currentJob) {
                 statusText += ` • ${state.currentJob.title} ($${state.salary.toLocaleString()}/yr)`;
-            } else if (state.age >= 67) {
-                statusText += " • Retired";
             } else {
                 statusText += " • Unemployed";
             }
             document.getElementById("playerStatusLine").textContent = statusText;
 
-            // Update 4 Stat Bars
-            const setStat = (valId, barId, val) => {
-                const clamped = Math.min(100, Math.max(0, Math.round(val)));
-                document.getElementById(valId).textContent = `${clamped}%`;
-                document.getElementById(barId).style.width = `${clamped}%`;
-            };
+            // Stat Bars
+            document.getElementById("statKnowledgeVal").textContent = `${Math.round(state.knowledge)}%`;
+            document.getElementById("statKnowledgeBar").style.width = `${Math.min(100, Math.max(0, state.knowledge))}%`;
 
-            setStat("statHappinessVal", "statHappinessBar", state.happiness);
-            setStat("statHealthVal", "statHealthBar", state.health);
-            setStat("statKnowledgeVal", "statKnowledgeBar", state.smarts);
-            setStat("statExperienceVal", "statExperienceBar", state.experience);
+            document.getElementById("statNetworkVal").textContent = `${Math.round(state.network)}%`;
+            document.getElementById("statNetworkBar").style.width = `${Math.min(100, Math.max(0, state.network))}%`;
+
+            document.getElementById("statEnergyVal").textContent = `${Math.round(state.energy)}%`;
+            document.getElementById("statEnergyBar").style.width = `${Math.min(100, Math.max(0, state.energy))}%`;
         }
 
-        function addTimelineEvent(textHtml, iconClass = "fa-newspaper", type = "normal") {
+        function addLogEvent(htmlText, type = "normal") {
             const feed = document.getElementById("timelineFeed");
             const entry = document.createElement("div");
 
-            let borderStyle = "border-l-4 border-bioDark bg-white";
-            let iconColor = "text-bioDark";
+            let borderClass = "border-l-4 border-bioMedium bg-emerald-50/50";
+            let iconClass = "fa-newspaper text-bioMedium";
 
             if (type === "grad") {
-                borderStyle = "border-l-4 border-bioGold bg-amber-50/60";
-                iconColor = "text-amber-700";
+                borderClass = "border-l-4 border-amber-500 bg-amber-50";
+                iconClass = "fa-graduation-cap text-amber-600";
             } else if (type === "job") {
-                borderStyle = "border-l-4 border-blue-600 bg-blue-50/60";
-                iconColor = "text-blue-700";
+                borderClass = "border-l-4 border-blue-500 bg-blue-50";
+                iconClass = "fa-briefcase text-blue-600";
             } else if (type === "money") {
-                borderStyle = "border-l-4 border-emerald-600 bg-emerald-50/60";
-                iconColor = "text-emerald-700";
+                borderClass = "border-l-4 border-emerald-600 bg-emerald-100/60";
+                iconClass = "fa-dollar-sign text-emerald-700";
             } else if (type === "event") {
-                borderStyle = "border-l-4 border-purple-600 bg-purple-50/60";
-                iconColor = "text-purple-700";
+                borderClass = "border-l-4 border-purple-500 bg-purple-50";
+                iconClass = "fa-flask text-purple-600";
             }
 
-            entry.className = `p-3 rounded-xl border border-bioTanLight ${borderStyle} text-xs leading-relaxed text-bioSlate shadow-sm flex items-start gap-3 animate-fade-in`;
+            entry.className = `p-3 rounded-lg border border-gray-200 ${borderClass} text-xs leading-relaxed text-gray-800 shadow-sm flex items-start gap-2.5`;
             entry.innerHTML = `
-                <div class="w-7 h-7 rounded-full bg-bioCream flex items-center justify-center shrink-0 mt-0.5 border border-bioTanLight">
-                    <i class="fas ${iconClass} ${iconColor} text-xs"></i>
-                </div>
+                <i class="fas ${iconClass} mt-0.5 text-sm"></i>
                 <div class="flex-1">
-                    <div class="flex justify-between items-center mb-0.5">
-                        <span class="font-bold text-[10px] uppercase text-bioDark tracking-wider">Age ${state.age} (${state.year})</span>
-                    </div>
-                    <div>${textHtml}</div>
+                    <span class="font-bold text-[10px] uppercase text-gray-500 block mb-0.5">Age ${state.age} (${state.year})</span>
+                    <div>${htmlText}</div>
                 </div>
             `;
 
-            feed.prepend(entry);
-            state.timeline.push({ age: state.age, year: state.year, text: textHtml });
+            feed.prepend(entry); // Newest events top
+            state.lifeLog.push({ age: state.age, year: state.year, text: htmlText });
         }
 
         /* ==========================================================================
-           7. ADVANCE YEAR MECHANICS & INTERACTIVE POPUPS
+           AGE UP / YEAR ADVANCEMENT
            ========================================================================== */
+
         function advanceYear() {
             state.age++;
             state.year++;
             playChime("normal");
 
-            // Cap at age 85
-            if (state.age >= 85) {
-                addTimelineEvent(`🕊️ <b>LEGACY CAP REACHED:</b> You reached age ${state.age} after a full and distinguished biotech life. Time to review your life summary!`, "fa-monument", "event");
-                updateUI();
-                openSummaryModal();
-                return;
-            }
+            let yearSummary = [];
 
-            let summaryParts = [];
-
-            // 1. Retirement check (Age 67+)
-            if (state.age >= 67) {
-                const pension = Math.floor((state.salary || 40000) * 0.45);
-                state.funds += pension;
-                summaryParts.push(`🌅 <b>RETIRED:</b> Received annual pension payout of $${pension.toLocaleString()}.`);
-            }
-            // 2. College Education Progress
-            else if (state.educationLevel === "undergrad") {
+            // 1. College progression
+            if (state.educationLevel === "undergrad_in_progress") {
                 state.collegeYear++;
-                state.smarts = Math.min(100, state.smarts + 8);
-                const annualTuition = 12000;
-                
-                if (state.funds >= annualTuition) {
-                    state.funds -= annualTuition;
-                    summaryParts.push(`Completed College Year ${state.collegeYear} studying ${state.major.name} (-$12,000 tuition paid).`);
-                } else {
-                    const debtAdded = annualTuition - Math.max(0, state.funds);
-                    state.debt += debtAdded;
-                    state.funds = 0;
-                    summaryParts.push(`Completed College Year ${state.collegeYear} studying ${state.major.name} (Took $${debtAdded.toLocaleString()} student loan debt).`);
-                }
+                state.knowledge = Math.min(100, state.knowledge + 8);
+                state.funds -= 4000; // Tuition & living expenses offset by financial aid
+                yearSummary.push(`Completed Year ${state.collegeYear} of College studying ${state.major.name}. (-$4,000 expenses)`);
 
                 if (state.collegeYear >= 4) {
                     state.educationLevel = "bachelors";
-                    summaryParts.push(`🎓 <b>CONGRATULATIONS!</b> Graduated with a Bachelor's Degree in ${state.major.name}! You are now qualified for specialized biotech roles.`);
-                    state.decisionLog.push(`Earned B.S. in ${state.major.name} at Age ${state.age}`);
-                    playChime("level");
+                    yearSummary.push(`🎓 <b>CONGRATULATIONS!</b> You graduated with a Bachelor's Degree in ${state.major.name}! You are now qualified for specialized biotech industry positions.`);
+                    state.decisionsMade.push(`Earned B.S. in ${state.major.name} at age ${state.age}`);
+                    playChime("success");
                 }
-            } 
-            // 3. Career & Paycheck Logic
-            else if (state.currentJob) {
+            }
+
+            // 2. Job Progression & Paycheck
+            if (state.currentJob) {
                 state.careerYears++;
-                const livingCost = Math.floor(state.salary * 0.55) + 12000;
-
-                // Promotion check
-                if (state.careerYears === 3 && state.careerLevel === "entry") {
-                    state.careerLevel = "median";
-                    state.salary = state.currentJob.salaryTier.median;
-                    summaryParts.push(`📈 <b>PROMOTION!</b> Advanced to Mid-Level ${state.currentJob.title}! Salary raised to $${state.salary.toLocaleString()}/yr.`);
-                    state.decisionLog.push(`Promoted to Mid-Level ${state.currentJob.title} ($${state.salary.toLocaleString()}/yr)`);
-                } else if (state.careerYears === 7 && state.careerLevel === "median") {
-                    state.careerLevel = "senior";
-                    state.salary = state.currentJob.salaryTier.senior;
-                    summaryParts.push(`🌟 <b>SENIOR PROMOTION!</b> Advanced to Senior ${state.currentJob.title}! Salary raised to $${state.salary.toLocaleString()}/yr.`);
-                    state.decisionLog.push(`Promoted to Senior ${state.currentJob.title} ($${state.salary.toLocaleString()}/yr)`);
-                } else {
-                    const raise = Math.floor(state.salary * 0.03);
-                    state.salary += raise;
-                }
-
-                const netIncome = Math.max(0, state.salary - livingCost);
-                state.funds += netIncome;
-                state.experience = Math.min(100, state.experience + 6);
-                summaryParts.push(`Worked as ${state.currentJob.title}. Net saved after expenses: <b>+$${netIncome.toLocaleString()}</b>.`);
+                // Annual salary increase
+                const bonus = Math.floor(state.salary * 0.04);
+                state.salary += bonus;
+                state.funds += state.salary;
+                state.network = Math.min(100, state.network + 3);
+                yearSummary.push(`Worked as ${state.currentJob.title}. Earned annual salary of <b>$${state.salary.toLocaleString()}</b> (+4% annual raise).`);
             } else {
-                state.funds += 2800;
-                summaryParts.push(`Earned $2,800 from part-time tutoring and lab assistant work.`);
+                // Allowance / odd jobs
+                state.funds += 2000;
+                yearSummary.push(`Earned $2,000 from odd jobs & freelance lab support.`);
             }
 
-            // Student Debt Loan Repayment
-            if (state.debt > 0 && state.funds > 2000) {
-                const loanPay = Math.min(state.debt, 4000);
-                state.debt -= loanPay;
-                state.funds -= loanPay;
-                summaryParts.push(`Paid $${loanPay.toLocaleString()} toward student loans.`);
+            // 3. Energy recover
+            state.energy = Math.min(100, state.energy + 20);
+
+            // Log Summary
+            addLogEvent(yearSummary.join(" "), state.currentJob ? "money" : "normal");
+
+            // 4. Random Life / Biotech Incident Event
+            triggerRandomLifeEvent();
+
+            // 5. Prompt Job Check if graduated without job
+            if (state.educationLevel === "bachelors" && !state.currentJob && state.collegeYear === 4) {
+                setTimeout(() => {
+                    openJobsModal("🎓 You just graduated college! Select your entry biotech career based on your degree:");
+                }, 800);
             }
-
-            // Stat fluctuations
-            state.health = Math.max(20, Math.min(100, state.health + (Math.random() * 4 - 2)));
-            state.happiness = Math.max(20, Math.min(100, state.happiness + (Math.random() * 4 - 2)));
-
-            addTimelineEvent(summaryParts.join(" "), state.currentJob ? "fa-dollar-sign" : "fa-calendar-alt", state.currentJob ? "money" : "normal");
 
             updateUI();
+        }
 
-            // TRIGGER INTERACTIVE ANNUAL POPUP SCENARIO
-            if (state.age < 67) {
-                setTimeout(triggerAnnualScenarioPopup, 400);
+        /* ==========================================================================
+           RANDOM BIOTECH WORKPLACE / COLLEGE EVENTS
+           ========================================================================== */
+
+        const RANDOM_EVENTS = [
+            {
+                title: "NJ Biotech Conference",
+                icon: "fa-users",
+                desc: "An annual NJ Bio Innovation Summit is taking place in Princeton, NJ. Do you want to attend to network with executives?",
+                btn1: "Pay $300 to attend & network",
+                btn2: "Skip it and save money",
+                action1: () => {
+                    state.funds -= 300;
+                    state.network = Math.min(100, state.network + 15);
+                    addLogEvent("Attended the NJ Biotech Summit in Princeton! Met key clinical coordinators. (+15% Network, -$300)", "event");
+                    updateUI();
+                },
+                action2: () => {
+                    addLogEvent("Decided not to attend the biotech conference this year.", "normal");
+                }
+            },
+            {
+                title: "FDA Inspection Audit",
+                icon: "fa-clipboard-check",
+                desc: "FDA inspectors arrive at your facility for an unannounced cGMP audit! How do you handle your documentation?",
+                btn1: "Work overtime to double-check LIMS records",
+                btn2: "Rely on standard procedures",
+                action1: () => {
+                    state.energy = Math.max(10, state.energy - 15);
+                    state.knowledge = Math.min(100, state.knowledge + 10);
+                    if (state.currentJob) state.funds += 1500; // Performance bonus
+                    addLogEvent("The FDA audit was a complete success! Your meticulous lab notebooks received high praise (+Bonus $1,500).", "event");
+                    updateUI();
+                },
+                action2: () => {
+                    addLogEvent("The FDA audit went smoothly with no critical observations.", "normal");
+                }
+            },
+            {
+                title: "Lab Equipment Breakthrough",
+                icon: "fa-lightbulb",
+                desc: "You notice a bottleneck in the cell culture bioreactor fluid lines. You propose an optimized protocol.",
+                btn1: "Present solution to management",
+                btn2: "Keep quiet and stick to SOP",
+                action1: () => {
+                    state.network = Math.min(100, state.network + 12);
+                    state.knowledge = Math.min(100, state.knowledge + 8);
+                    addLogEvent("Management loved your process development suggestion! (+12 Network, +8 Knowledge)", "event");
+                    updateUI();
+                },
+                action2: () => {
+                    addLogEvent("You maintained standard operating procedures in the laboratory.", "normal");
+                }
+            },
+            {
+                title: "Continuing Education Seminar",
+                icon: "fa-book-open",
+                desc: "Rutgers University is hosting a specialized webinar on Next-Generation Genomic Sequencing.",
+                btn1: "Study late into the night (+Knowledge)",
+                btn2: "Get a full night's rest (+Energy)",
+                action1: () => {
+                    state.knowledge = Math.min(100, state.knowledge + 12);
+                    state.energy = Math.max(10, state.energy - 10);
+                    addLogEvent("Studied cutting-edge genomic sequencing workflows! (+12 Knowledge, -10 Energy)", "event");
+                    updateUI();
+                },
+                action2: () => {
+                    state.energy = Math.min(100, state.energy + 15);
+                    addLogEvent("Rested well and recharged your energy reserves.", "normal");
+                }
+            }
+        ];
+
+        function triggerRandomLifeEvent() {
+            // 35% chance per year
+            if (Math.random() < 0.38) {
+                const ev = RANDOM_EVENTS[Math.floor(Math.random() * RANDOM_EVENTS.length)];
+                showModal(
+                    ev.title,
+                    ev.icon,
+                    `<p>${ev.desc}</p>`,
+                    [
+                        { text: ev.btn1, primary: true, onClick: () => { closeModal(); ev.action1(); } },
+                        { text: ev.btn2, primary: false, onClick: () => { closeModal(); ev.action2(); } }
+                    ]
+                );
             }
         }
 
         /* ==========================================================================
-           8. INTERACTIVE ANNUAL SCENARIO POPUP SYSTEM
+           MODAL & DECISION SYSTEM
            ========================================================================== */
-        function triggerAnnualScenarioPopup() {
-            // Post-Grad Job Prompt Priority
-            if (state.educationLevel === "bachelors" && state.collegeYear === 4 && !state.currentJob) {
-                openJobsModal("🎓 You just graduated college! Select your specialized biotech career based on your degree:");
-                return;
-            }
 
-            // Pick a random interactive scenario
-            const scenario = ANNUAL_SCENARIOS[Math.floor(Math.random() * ANNUAL_SCENARIOS.length)];
-
-            let html = `
-                <div class="text-left space-y-3">
-                    <p class="text-xs sm:text-sm text-bioSlate">${scenario.desc}</p>
-                    <div class="space-y-2 pt-2">
-            `;
-
-            scenario.choices.forEach((choice, idx) => {
-                html += `
-                    <button onclick="makeScenarioChoice('${scenario.id}', ${idx})" class="bitlife-btn w-full p-3 bg-bioCream hover:bg-bioTanLight/60 rounded-xl border border-bioTan text-left text-xs font-semibold text-bioDark shadow-sm flex items-center justify-between">
-                        <span>${choice.text}</span>
-                        <i class="fas fa-chevron-right text-bioTan"></i>
-                    </button>
-                `;
-            });
-
-            html += `</div></div>`;
-
-            showModal(scenario.title, scenario.icon, html, []);
-        }
-
-        function makeScenarioChoice(scenarioId, choiceIdx) {
-            const scenario = ANNUAL_SCENARIOS.find(s => s.id === scenarioId);
-            if (!scenario) return;
-
-            const choice = scenario.choices[choiceIdx];
-            const eff = choice.effect;
-
-            if (eff.smarts) state.smarts = Math.max(0, Math.min(100, state.smarts + eff.smarts));
-            if (eff.experience) state.experience = Math.max(0, Math.min(100, state.experience + eff.experience));
-            if (eff.happiness) state.happiness = Math.max(0, Math.min(100, state.happiness + eff.happiness));
-            if (eff.health) state.health = Math.max(0, Math.min(100, state.health + eff.health));
-            if (eff.funds) state.funds += eff.funds;
-            if (eff.salaryPct && state.currentJob) state.salary = Math.floor(state.salary * (1 + eff.salaryPct));
-
-            if (eff.log) {
-                addTimelineEvent(`👉 <b>Decision:</b> ${eff.log}`, "fa-check-circle", "event");
-                state.decisionLog.push(eff.log);
-            }
-
-            closeModal();
-            updateUI();
-            playChime("success");
-        }
-
-        /* ==========================================================================
-           9. MODAL DIALOG DISPLAY SYSTEM
-           ========================================================================== */
-        function showModal(title, iconClass, bodyHtml, buttonsArray = []) {
-            document.getElementById("modalTitle").innerHTML = `<i class="fas ${iconClass} text-bioGold mr-2"></i> ${title}`;
+        function showModal(title, iconClass, bodyHtml, buttonsArray) {
+            document.getElementById("modalTitle").innerHTML = `<i class="fas ${iconClass} text-bioAccent"></i> ${title}`;
             document.getElementById("modalBody").innerHTML = bodyHtml;
 
             const footer = document.getElementById("modalFooter");
             footer.innerHTML = "";
 
-            if (buttonsArray.length === 0) {
-                footer.classList.add("hidden");
-            } else {
-                footer.classList.remove("hidden");
-                buttonsArray.forEach(btn => {
-                    const button = document.createElement("button");
-                    button.className = btn.primary 
-                        ? "bitlife-btn bg-bioDark hover:bg-emerald-900 text-white font-bold py-2 px-4 rounded-xl border border-bioGold shadow text-xs"
-                        : "bitlife-btn bg-bioTanLight hover:bg-gray-300 text-bioDark font-semibold py-2 px-4 rounded-xl text-xs";
-                    button.textContent = btn.text;
-                    button.onclick = btn.onClick;
-                    footer.appendChild(button);
-                });
-            }
+            buttonsArray.forEach(btn => {
+                const button = document.createElement("button");
+                button.className = btn.primary 
+                    ? "bitlife-btn bg-bioDark hover:bg-bioMedium text-white font-bold py-2.5 px-4 rounded-xl border border-bioAccent shadow text-xs sm:text-sm"
+                    : "bitlife-btn bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2.5 px-4 rounded-xl text-xs sm:text-sm";
+                button.textContent = btn.text;
+                button.onclick = btn.onClick;
+                footer.appendChild(button);
+            });
 
             document.getElementById("gameModalOverlay").classList.remove("hidden");
         }
@@ -1070,71 +868,67 @@
         }
 
         /* ==========================================================================
-           10. FIRST-PERSON POV HIGH SCHOOL GRADUATION DECISION
+           1. HIGH SCHOOL GRADUATION PATH CHOICE
            ========================================================================== */
+
         function promptHighSchoolGraduationChoice() {
             showModal(
-                "High School Graduation Path Decision",
+                "High School Graduation Decision",
                 "fa-graduation-cap",
                 `
                 <div class="text-center space-y-3">
-                    <p class="font-bold text-sm sm:text-base text-bioDark">You are graduating high school in New Jersey!</p>
-                    <p class="text-xs text-bioSlate">As you step into adulthood, choose how you wish to launch your Biotech career pathway:</p>
+                    <p class="font-semibold text-base text-bioDark">Congratulations on graduating high school! 🎉</p>
+                    <p class="text-xs text-gray-600">Which path do you want to pursue to start your biotech career journey?</p>
                     
                     <div class="grid grid-cols-1 gap-3 pt-2">
-                        <div class="p-3.5 bg-bioCream rounded-xl border-2 border-bioDark cursor-pointer hover:border-bioGold transition text-left shadow-sm" onclick="choosePathCollege()">
-                            <div class="font-bold text-bioDark text-sm flex items-center gap-2">
-                                <i class="fas fa-university text-bioDark"></i> Go to College (4-Year Bachelor's Degree)
-                            </div>
-                            <p class="text-[11px] text-bioSlate mt-1">Enroll in specialized degree programs (Biology, Biotech, Bioinformatics, Engineering, Pre-Law, Finance, etc.) to qualify for high-tier roles.</p>
+                        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-left cursor-pointer hover:border-bioMedium" onclick="choosePathCollege()">
+                            <div class="font-bold text-bioDark text-sm"><i class="fas fa-university text-bioMedium mr-1.5"></i> Pursue Higher Education (College Degree)</div>
+                            <p class="text-[11px] text-gray-600 mt-0.5">Select a specialized Bachelor's major (Biology, Biotech, Bioinformatics, Engineering, Finance, etc.) to unlock high-earning career options.</p>
                         </div>
 
-                        <div class="p-3.5 bg-blue-50/70 rounded-xl border-2 border-blue-400 cursor-pointer hover:border-blue-700 transition text-left shadow-sm" onclick="choosePathWorkforce()">
-                            <div class="font-bold text-blue-900 text-sm flex items-center gap-2">
-                                <i class="fas fa-briefcase text-blue-700"></i> Enter Workforce Immediately
-                            </div>
-                            <p class="text-[11px] text-bioSlate mt-1">Start earning right away in High School / Associate level biotech roles (Quality Control Tech, Lab Assistant, Maintenance, Manufacturing).</p>
+                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-200 text-left cursor-pointer hover:border-blue-500" onclick="choosePathWorkforce()">
+                            <div class="font-bold text-blue-900 text-sm"><i class="fas fa-briefcase text-blue-600 mr-1.5"></i> Enter Workforce Immediately</div>
+                            <p class="text-[11px] text-gray-600 mt-0.5">Start working right away in biotech careers requiring a High School Diploma or Associate Degree (QC Technician, Lab Assistant, Maintenance, etc.).</p>
                         </div>
                     </div>
                 </div>
                 `,
-                []
+                [] // Action handled inside cards
             );
         }
 
         function choosePathCollege() {
             closeModal();
-            state.decisionLog.push("Chose College Education Path after High School");
+            state.decisionsMade.push("Chose College Path after High School");
             openDegreeSelectionModal();
         }
 
         function choosePathWorkforce() {
             closeModal();
-            state.decisionLog.push("Entered Workforce Directly after High School");
-            addTimelineEvent("Decided to enter the biotech workforce directly after high school.", "fa-briefcase", "job");
+            state.decisionsMade.push("Entered Workforce Immediately after High School");
+            addLogEvent("Decided to enter the workforce directly after high school.", "job");
             openJobsModal("Select an entry-level biotech position requiring High School Diploma:");
         }
 
         /* ==========================================================================
-           11. COLLEGE DEGREE SELECTION (ALL 20 DEGREES)
+           2. DEGREE SELECTION MODAL
            ========================================================================== */
+
         function openDegreeSelectionModal() {
             let html = `
-                <p class="text-xs text-bioSlate mb-3">Select your major from all 20 specialized fields. Your degree directly dictates which career pathways you qualify for upon graduation!</p>
+                <p class="text-xs text-gray-600 mb-3">Choose your area of study. Your degree will dictate which specialized biotech fields you qualify for upon graduation!</p>
                 <div class="space-y-2 max-h-[320px] overflow-y-auto pr-1">
             `;
 
-            ALL_20_DEGREES.filter(d => !d.isGraduate).forEach(deg => {
+            DEGREES_LIST.filter(d => !d.reqGrad).forEach(deg => {
                 html += `
-                    <div class="p-3 bg-white rounded-xl border border-bioTanLight hover:border-bioDark transition flex justify-between items-center text-xs shadow-sm">
-                        <div class="pr-2">
-                            <div class="flex items-center gap-2">
-                                <span class="font-bold text-bioDark text-sm">${deg.name}</span>
-                                <span class="text-[9px] bg-bioCream text-bioDark font-bold px-2 py-0.5 rounded-full border border-bioTanLight">${deg.category}</span>
-                            </div>
-                            <p class="text-[11px] text-bioSlate mt-0.5">${deg.desc}</p>
+                    <div class="p-2.5 bg-white rounded-lg border border-gray-200 hover:border-bioMedium transition flex justify-between items-center text-xs">
+                        <div>
+                            <span class="font-bold text-bioDark text-sm block">${deg.name}</span>
+                            <span class="text-[10px] text-bioMuted bg-gray-100 px-1.5 py-0.5 rounded font-medium">${deg.category}</span>
+                            <p class="text-[11px] text-gray-500 mt-1">${deg.desc}</p>
                         </div>
-                        <button onclick="selectMajor('${deg.id}')" class="bitlife-btn bg-bioDark hover:bg-emerald-900 text-white font-bold px-3 py-1.5 rounded-lg text-xs shrink-0 border border-bioGold">
+                        <button onclick="selectMajor('${deg.id}')" class="bitlife-btn bg-bioDark hover:bg-bioMedium text-white font-bold px-3 py-1.5 rounded-lg text-xs ml-2 border border-bioAccent">
                             Enroll
                         </button>
                     </div>
@@ -1143,153 +937,92 @@
 
             html += `</div>`;
 
-            showModal("Select College Major (20 Fields)", "fa-university", html, [
-                { text: "Close", primary: false, onClick: closeModal }
+            showModal("Select College Major", "fa-university", html, [
+                { text: "Cancel / Back", primary: false, onClick: closeModal }
             ]);
         }
 
         function selectMajor(degId) {
-            const majorObj = ALL_20_DEGREES.find(d => d.id === degId);
+            const majorObj = DEGREES_LIST.find(d => d.id === degId);
             state.major = majorObj;
-            state.educationLevel = "undergrad";
+            state.educationLevel = "undergrad_in_progress";
             state.collegeYear = 1;
 
-            addTimelineEvent(`🎓 Enrolled at Rutgers University majoring in <b>${majorObj.name}</b>!`, "fa-graduation-cap", "grad");
-            state.decisionLog.push(`Enrolled in ${majorObj.name} Major`);
-
-            closeModal();
-            updateUI();
-            playChime("level");
-        }
-
-        /* ==========================================================================
-           12. WORK & CAREER MENUS
-           ========================================================================== */
-        function openWorkMenu() {
-            let html = `
-                <div class="space-y-2 text-xs">
-                    ${state.currentJob ? `
-                        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-300">
-                            <div class="font-bold text-emerald-900 text-sm">${state.currentJob.title}</div>
-                            <div class="text-[11px] text-emerald-700">Salary: $${state.salary.toLocaleString()}/yr • Level: ${state.careerLevel.toUpperCase()}</div>
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-2 pt-2">
-                            <button onclick="workHarder()" class="bitlife-btn p-3 bg-white hover:bg-bioCream rounded-xl border border-bioTan text-left font-bold text-bioDark shadow-sm">
-                                <i class="fas fa-briefcase text-emerald-700 mr-1.5"></i> Work Harder
-                                <span class="block text-[10px] font-normal text-bioSlate mt-0.5">Boost job standing & promotion chances.</span>
-                            </button>
-                            <button onclick="askForRaise()" class="bitlife-btn p-3 bg-white hover:bg-bioCream rounded-xl border border-bioTan text-left font-bold text-bioDark shadow-sm">
-                                <i class="fas fa-hand-holding-usd text-amber-600 mr-1.5"></i> Ask for Raise
-                                <span class="block text-[10px] font-normal text-bioSlate mt-0.5">Request salary increase from management.</span>
-                            </button>
-                        </div>
-                    ` : '<div class="p-3 text-xs text-bioSlate bg-bioCream rounded-xl border">You are currently unemployed. Browse open positions below!</div>'}
-
-                    <button onclick="closeModal(); openJobsModal();" class="bitlife-btn w-full p-3 bg-bioDark hover:bg-emerald-900 text-white font-bold rounded-xl text-xs flex items-center justify-between mt-2">
-                        <span><i class="fas fa-search mr-2"></i> Browse All Biotech Careers</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            `;
-
-            showModal("Workplace & Career Dashboard", "fa-briefcase", html, [
-                { text: "Close", primary: false, onClick: closeModal }
-            ]);
-        }
-
-        function workHarder() {
-            state.jobPerformance = Math.min(100, state.jobPerformance + 15);
-            state.experience = Math.min(100, state.experience + 4);
-            state.health = Math.max(10, state.health - 3);
-
-            addTimelineEvent(`💼 Worked overtime and put in extra effort at ${state.currentJob.title}! (+Performance, +Experience)`, "fa-briefcase", "job");
-            state.decisionLog.push(`Worked harder at ${state.currentJob.title}`);
+            addLogEvent(`🎓 Enrolled at Rutgers University in New Jersey majoring in <b>${majorObj.name}</b>!`, "grad");
+            state.decisionsMade.push(`Enrolled in ${majorObj.name} Major`);
 
             closeModal();
             updateUI();
             playChime("success");
         }
 
-        function askForRaise() {
-            if (state.jobPerformance >= 75) {
-                const raiseAmount = Math.floor(state.salary * 0.07);
-                state.salary += raiseAmount;
-                addTimelineEvent(`💰 Management approved your performance raise! Salary increased by +$${raiseAmount.toLocaleString()}/yr!`, "fa-dollar-sign", "money");
-                state.decisionLog.push(`Received performance raise (+$${raiseAmount.toLocaleString()}/yr)`);
-                playChime("level");
-            } else {
-                addTimelineEvent(`❌ Management declined your raise request. Work harder to build standing!`, "fa-times-circle", "normal");
-            }
-            closeModal();
-            updateUI();
-        }
-
         /* ==========================================================================
-           13. CAREER DIRECTORY & MATCHING (18 CAREERS WITH METRICS)
+           3. JOBS / CAREERS MODAL
            ========================================================================== */
-        function openJobsModal(customMsg = "") {
-            let html = `<p class="text-xs text-bioSlate mb-2.5">${customMsg || "Browse open biotech career opportunities matched to your educational credentials:"}</p>`;
 
-            // Qualified Jobs Filter
-            const qualifiedJobs = ALL_CAREERS.filter(job => {
+        function openJobsModal(customMsg = "") {
+            let html = `<p class="text-xs text-gray-600 mb-2">${customMsg || "Browse biotech career opportunities based on your education level:"}</p>`;
+
+            // Filter jobs user qualifies for
+            const qualifiedJobs = JOBS_DATABASE.filter(job => {
                 if (job.minEducation === "highschool") return true;
                 if (job.minEducation === "bachelors") {
-                    if (state.educationLevel === "highschool" || state.educationLevel === "undergrad") return false;
+                    if (state.educationLevel === "highschool" || state.educationLevel === "undergrad_in_progress") return false;
+                    // Check degree compatibility
                     if (job.allowedDegrees.length === 0) return true;
                     return state.major && job.allowedDegrees.includes(state.major.id);
                 }
                 if (job.minEducation === "jd") {
-                    return state.educationLevel === "jd" || state.hasPassedBarExam;
+                    return state.hasLawDegree || (state.major && state.major.id === "jd");
                 }
                 return false;
             });
 
-            const lockedJobs = ALL_CAREERS.filter(j => !qualifiedJobs.includes(j));
+            const nonQualifiedJobs = JOBS_DATABASE.filter(j => !qualifiedJobs.includes(j));
 
-            html += `<div class="space-y-2.5 max-h-[340px] overflow-y-auto pr-1">`;
+            html += `<div class="space-y-2 max-h-[340px] overflow-y-auto pr-1">`;
 
-            html += `<div class="text-[11px] font-bold text-bioDark uppercase tracking-wider mb-1">Qualified Positions (${qualifiedJobs.length})</div>`;
+            html += `<div class="text-[11px] font-bold text-bioDark uppercase tracking-wider mb-1">Available Positions You Qualify For (${qualifiedJobs.length})</div>`;
 
             if (qualifiedJobs.length === 0) {
-                html += `<div class="p-3 text-xs text-amber-900 bg-amber-50 rounded-xl border border-amber-200">No positions matching your major currently. Finish college or enroll in continuing education!</div>`;
+                html += `<div class="p-3 text-xs text-amber-800 bg-amber-50 rounded-lg">No open positions matching your current degree yet. Consider completing your degree or continuing education!</div>`;
             }
 
             qualifiedJobs.forEach(job => {
                 const isCurrent = state.currentJob && state.currentJob.id === job.id;
                 html += `
-                    <div class="p-3 bg-white rounded-xl border ${isCurrent ? 'border-2 border-emerald-600 bg-emerald-50/40' : 'border-bioTanLight'} hover:shadow-md transition text-xs">
-                        <div class="flex justify-between items-start mb-1">
+                    <div class="p-3 bg-white rounded-xl border ${isCurrent ? 'border-2 border-emerald-500 bg-emerald-50/40' : 'border-gray-200'} hover:shadow-md transition text-xs">
+                        <div class="flex justify-between items-start">
                             <div>
                                 <span class="font-bold text-bioDark text-sm">${job.title}</span>
-                                <span class="ml-2 text-[9px] bg-bioCream text-bioDark px-2 py-0.5 rounded-full font-bold border border-bioTanLight">${job.category}</span>
+                                <span class="ml-2 text-[10px] bg-bioDark/10 text-bioDark px-2 py-0.5 rounded-full font-bold">${job.category}</span>
                             </div>
                             <div class="text-right">
-                                <span class="font-bold text-emerald-700 text-sm">$${job.salaryTier.median.toLocaleString()}/yr</span>
-                                <span class="block text-[9px] text-bioSlate">Entry: $${job.salaryTier.entry.toLocaleString()} | Sr: $${job.salaryTier.senior.toLocaleString()}</span>
+                                <span class="font-bold text-emerald-700 text-sm">$${job.medianSalary.toLocaleString()}/yr</span>
+                                <span class="block text-[9px] text-gray-400">Entry: $${job.entrySalary.toLocaleString()}</span>
                             </div>
                         </div>
-                        <p class="text-[11px] text-bioSlate mb-1.5">${job.desc}</p>
-                        <div class="text-[10px] italic text-bioDark bg-bioCream p-2 rounded-lg mb-2 border border-bioTanLight"><b>Day in the Life:</b> ${job.dayInLife}</div>
-                        <div class="flex justify-between items-center pt-1 border-t border-bioTanLight">
-                            <span class="text-[10px] font-medium text-bioSlate">Req: ${job.minEducation === 'highschool' ? 'High School Diploma' : 'Bachelor Degree'}</span>
-                            ${isCurrent ? '<span class="font-bold text-emerald-700 text-xs"><i class="fas fa-check-circle mr-1"></i> Current Role</span>' : 
-                            `<button onclick="applyForJob('${job.id}')" class="bitlife-btn bg-bioDark hover:bg-emerald-900 text-white font-bold px-3 py-1 rounded-lg text-xs border border-bioGold">Apply Now</button>`}
+                        <p class="text-[11px] text-gray-600 my-1.5">${job.desc}</p>
+                        <div class="text-[10px] italic text-bioMuted bg-gray-50 p-1.5 rounded mb-2"><b>Day in the Life:</b> ${job.dayInLife}</div>
+                        <div class="flex justify-between items-center pt-1 border-t border-gray-100">
+                            <span class="text-[10px] text-gray-500">Req: ${job.minEducation === 'highschool' ? 'High School Diploma' : 'Bachelor Degree'}</span>
+                            ${isCurrent ? '<span class="font-bold text-emerald-700 text-xs"><i class="fas fa-check-circle"></i> Current Job</span>' : 
+                            `<button onclick="applyForJob('${job.id}')" class="bitlife-btn bg-bioDark hover:bg-bioMedium text-white font-bold px-3 py-1 rounded-lg text-xs border border-bioAccent">Apply Now</button>`}
                         </div>
                     </div>
                 `;
             });
 
-            if (lockedJobs.length > 0) {
-                html += `<div class="text-[11px] font-bold text-bioSlate uppercase tracking-wider mt-4 mb-1">Locked Positions (Degree Gated)</div>`;
-                lockedJobs.forEach(job => {
+            if (nonQualifiedJobs.length > 0) {
+                html += `<div class="text-[11px] font-bold text-gray-400 uppercase tracking-wider mt-4 mb-1">Locked Positions (Degree Required)</div>`;
+                nonQualifiedJobs.forEach(job => {
                     html += `
-                        <div class="p-2.5 bg-bioCream/80 rounded-xl border border-bioTanLight text-xs opacity-70 flex justify-between items-center">
+                        <div class="p-2.5 bg-gray-100 rounded-lg border border-gray-200 text-xs opacity-60 flex justify-between items-center">
                             <div>
-                                <span class="font-bold text-bioDark">${job.title}</span>
-                                <span class="block text-[10px] text-bioSlate">Requires: ${job.minEducation === 'jd' ? 'Law Degree (JD)' : 'Bachelor Degree'}</span>
+                                <span class="font-bold text-gray-700">${job.title}</span>
+                                <span class="block text-[10px] text-gray-500">Requires specialized degree in: ${job.allowedDegrees.join(', ')}</span>
                             </div>
-                            <span class="text-xs font-mono font-bold text-bioSlate">$${job.salaryTier.median.toLocaleString()}</span>
+                            <span class="text-xs font-mono font-bold text-gray-500">$${job.medianSalary.toLocaleString()}</span>
                         </div>
                     `;
                 });
@@ -1303,14 +1036,12 @@
         }
 
         function applyForJob(jobId) {
-            const job = ALL_CAREERS.find(j => j.id === jobId);
+            const job = JOBS_DATABASE.find(j => j.id === jobId);
             state.currentJob = job;
-            state.careerLevel = "entry";
-            state.salary = job.salaryTier.entry;
-            state.careerYears = 0;
+            state.salary = job.medianSalary;
             
-            addTimelineEvent(`💼 Accepted position as <b>${job.title}</b> starting salary: <b>$${job.salaryTier.entry.toLocaleString()} / yr</b>!`, "fa-briefcase", "job");
-            state.decisionLog.push(`Started career as ${job.title}`);
+            addLogEvent(`💼 Hired as a <b>${job.title}</b> with starting salary of <b>$${job.medianSalary.toLocaleString()} / year</b>!`, "job");
+            state.decisionsMade.push(`Accepted position as ${job.title}`);
 
             closeModal();
             updateUI();
@@ -1318,123 +1049,42 @@
         }
 
         /* ==========================================================================
-           14. LIFESTYLE & SELF-CARE MENU
+           4. ACTIVITIES & NJ INTERNSHIPS MODAL
            ========================================================================== */
-        function openLifestyleMenu() {
-            let html = `
-                <div class="grid grid-cols-1 gap-2.5 text-xs">
-                    <button onclick="takeVacation()" class="bitlife-btn p-3 bg-white hover:bg-bioCream rounded-xl border border-bioTan text-left font-bold text-bioDark shadow-sm flex items-center justify-between">
-                        <div>
-                            <span class="text-sm"><i class="fas fa-plane-departure text-amber-600 mr-2"></i> Take a Vacation (-$800)</span>
-                            <span class="block text-[11px] font-normal text-bioSlate mt-0.5">Boost Happiness (+15%) and reduce stress.</span>
-                        </div>
-                        <i class="fas fa-chevron-right text-bioTan"></i>
-                    </button>
 
-                    <button onclick="goToGym()" class="bitlife-btn p-3 bg-white hover:bg-bioCream rounded-xl border border-bioTan text-left font-bold text-bioDark shadow-sm flex items-center justify-between">
-                        <div>
-                            <span class="text-sm"><i class="fas fa-running text-emerald-600 mr-2"></i> Fitness & Wellness Workout (-$50)</span>
-                            <span class="block text-[11px] font-normal text-bioSlate mt-0.5">Improve Health (+10%) and stamina.</span>
-                        </div>
-                        <i class="fas fa-chevron-right text-bioTan"></i>
-                    </button>
-
-                    <button onclick="networkPeers()" class="bitlife-btn p-3 bg-white hover:bg-bioCream rounded-xl border border-bioTan text-left font-bold text-bioDark shadow-sm flex items-center justify-between">
-                        <div>
-                            <span class="text-sm"><i class="fas fa-comments text-purple-600 mr-2"></i> Biotech Peer Networking (-$150)</span>
-                            <span class="block text-[11px] font-normal text-bioSlate mt-0.5">Expand professional connections (+10% Experience).</span>
-                        </div>
-                        <i class="fas fa-chevron-right text-bioTan"></i>
-                    </button>
-                </div>
-            `;
-
-            showModal("Self-Care & Lifestyle Activities", "fa-heart", html, [
-                { text: "Close", primary: false, onClick: closeModal }
-            ]);
-        }
-
-        function takeVacation() {
-            if (state.funds < 800) {
-                alert("You need at least $800 cash for a vacation!");
-                return;
-            }
-            state.funds -= 800;
-            state.happiness = Math.min(100, state.happiness + 18);
-            state.health = Math.min(100, state.health + 8);
-
-            addTimelineEvent(`🏖️ Took a relaxing vacation to Cape May, NJ (-$800, +Happiness, +Health)!`, "fa-plane", "event");
-            state.decisionLog.push("Took vacation to Cape May, NJ");
-
-            closeModal();
-            updateUI();
-            playChime("success");
-        }
-
-        function goToGym() {
-            if (state.funds < 50) {
-                alert("You need $50 cash for a gym session!");
-                return;
-            }
-            state.funds -= 50;
-            state.health = Math.min(100, state.health + 12);
-
-            addTimelineEvent(`🏃 Worked out at the gym (-$50, +12% Health)!`, "fa-running", "event");
-            closeModal();
-            updateUI();
-            playChime("success");
-        }
-
-        function networkPeers() {
-            if (state.funds < 150) {
-                alert("You need $150 cash for networking dinner!");
-                return;
-            }
-            state.funds -= 150;
-            state.experience = Math.min(100, state.experience + 8);
-            state.smarts = Math.min(100, state.smarts + 4);
-
-            addTimelineEvent(`🤝 Attended a New Jersey BioTech networking dinner (-$150, +Experience)!`, "fa-users", "event");
-            closeModal();
-            updateUI();
-            playChime("success");
-        }
-
-        /* ==========================================================================
-           15. INTERNSHIPS & ACTIVITIES MODAL
-           ========================================================================== */
         function openActivitiesModal() {
             let html = `
-                <p class="text-xs text-bioSlate mb-3">Participate in New Jersey biotech fellowships, research programs, or Law School:</p>
+                <p class="text-xs text-gray-600 mb-3">Participate in New Jersey extracurriculars, research fellowships, or continuing education to boost your skills and network!</p>
                 
-                ${(state.educationLevel === "bachelors" && !state.hasPassedBarExam) ? `
-                    <div class="p-3.5 bg-purple-50 rounded-xl border-2 border-purple-300 mb-3 text-xs">
-                        <div class="font-bold text-purple-900 text-sm flex items-center gap-1.5"><i class="fas fa-balance-scale text-purple-700"></i> Enroll in Law School (Juris Doctor - J.D.)</div>
-                        <p class="text-[11px] text-purple-800 my-1">Study Patent & Biotech IP Law to qualify for Legal Counsel positions ($157,000+ median salary)!</p>
-                        <button onclick="enrollLawSchool()" class="bitlife-btn bg-purple-800 hover:bg-purple-900 text-white font-bold px-3.5 py-1.5 rounded-lg text-xs border border-purple-300 mt-1">
-                            Enroll in Law School ($15,000 Tuition)
+                <!-- SPECIAL LAW SCHOOL / JD DEGREE ACTION -->
+                ${(state.educationLevel === "bachelors" && !state.hasLawDegree) ? `
+                    <div class="p-3 bg-purple-50 rounded-xl border border-purple-200 mb-3 text-xs">
+                        <div class="font-bold text-purple-900 text-sm"><i class="fas fa-balance-scale text-purple-700 mr-1"></i> Apply to Law School (Juris Doctor - JD)</div>
+                        <p class="text-[11px] text-purple-700 my-1">Pursue a JD Law degree to qualify for lucrative Biotech Legal & IP Counsel positions!</p>
+                        <button onclick="enrollLawSchool()" class="bitlife-btn bg-purple-800 hover:bg-purple-900 text-white font-bold px-3 py-1.5 rounded-lg text-xs border border-purple-300 mt-1">
+                            Enroll in Law School ($12,000 Tuition)
                         </button>
                     </div>
                 ` : ''}
 
-                <div class="space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
+                <div class="space-y-2 max-h-[300px] overflow-y-auto pr-1">
             `;
 
-            INTERNSHIPS_NJ.forEach((item) => {
+            INTERNSHIPS_NJ.forEach((item, idx) => {
                 html += `
-                    <div class="p-3 bg-white rounded-xl border border-bioTanLight hover:border-bioDark transition text-xs shadow-sm">
+                    <div class="p-3 bg-white rounded-xl border border-gray-200 hover:border-bioMedium transition text-xs">
                         <div class="flex justify-between items-start">
                             <div>
                                 <span class="font-bold text-bioDark text-sm">${item.name}</span>
-                                <span class="block text-[10px] text-bioSlate"><i class="fas fa-map-marker-alt text-amber-700 mr-1"></i>${item.location}</span>
+                                <span class="block text-[10px] text-gray-500"><i class="fas fa-map-marker-alt text-red-500 mr-1"></i>${item.location}</span>
                             </div>
-                            <span class="font-bold text-xs ${item.cost < 0 ? 'text-amber-800' : 'text-emerald-700'}">
+                            <span class="font-bold text-xs ${item.cost < 0 ? 'text-rose-600' : 'text-emerald-600'}">
                                 ${item.cost < 0 ? `-$${Math.abs(item.cost)} Fee` : 'FREE / Stipend'}
                             </span>
                         </div>
-                        <p class="text-[11px] text-bioSlate my-1.5">${item.desc}</p>
-                        <button onclick="participateActivity('${item.id}')" class="bitlife-btn bg-bioDark hover:bg-emerald-900 text-white font-bold px-3 py-1 rounded-lg text-xs border border-bioGold">
-                            Apply / Participate
+                        <p class="text-[11px] text-gray-600 my-1.5">${item.desc}</p>
+                        <button onclick="participateActivity(${idx})" class="bitlife-btn bg-bioDark hover:bg-bioMedium text-white font-bold px-3 py-1 rounded-lg text-xs border border-bioAccent">
+                            Participate
                         </button>
                     </div>
                 `;
@@ -1442,29 +1092,26 @@
 
             html += `</div>`;
 
-            showModal("NJ Biotech Internships & Fellowships", "fa-vial", html, [
+            showModal("NJ Biotech Extracurriculars & Fellowships", "fa-vial", html, [
                 { text: "Close", primary: false, onClick: closeModal }
             ]);
         }
 
-        function participateActivity(actId) {
-            const act = INTERNSHIPS_NJ.find(a => a.id === actId);
-            if (!act) return;
-
+        function participateActivity(index) {
+            const act = INTERNSHIPS_NJ[index];
             if (act.cost < 0 && state.funds < Math.abs(act.cost)) {
-                alert("You do not have enough bank funds to cover the tuition fee!");
+                alert("You do not have enough funds to cover the program fee!");
                 return;
             }
 
             if (act.cost < 0) state.funds -= Math.abs(act.cost);
             if (act.stipend) state.funds += act.stipend;
 
-            state.smarts = Math.min(100, state.smarts + act.statGain.smarts);
-            state.experience = Math.min(100, state.experience + act.statGain.experience);
-            state.happiness = Math.min(100, state.happiness + act.statGain.happiness);
+            state.knowledge = Math.min(100, state.knowledge + act.statGain.knowledge);
+            state.network = Math.min(100, state.network + act.statGain.network);
 
-            addTimelineEvent(`🔬 Completed <b>${act.name}</b> in ${act.location}! (+${act.statGain.smarts}% Smarts, +${act.statGain.experience}% Experience)`, "fa-vial", "event");
-            state.decisionLog.push(`Completed ${act.name}`);
+            addLogEvent(`🔬 Participated in <b>${act.name}</b> in ${act.location}! (+${act.statGain.knowledge} Knowledge, +${act.statGain.network} Network)`, "event");
+            state.decisionsMade.push(`Completed ${act.name}`);
 
             closeModal();
             updateUI();
@@ -1472,21 +1119,17 @@
         }
 
         function enrollLawSchool() {
-            if (state.funds < 15000 && state.debt > 30000) {
-                alert("Law School requires either $15,000 cash or manageable loan debt!");
+            if (state.funds < 12000) {
+                alert("Law school tuition requires at least $12,000 in bank balance!");
                 return;
             }
-            if (state.funds >= 15000) {
-                state.funds -= 15000;
-            } else {
-                state.debt += 15000;
-            }
-            state.hasPassedBarExam = true;
+            state.funds -= 12000;
+            state.hasLawDegree = true;
             state.educationLevel = "jd";
-            state.smarts = 100;
+            state.knowledge = 100;
             
-            addTimelineEvent("⚖️ <b>PASSED BAR EXAM & EARNED J.D.!</b> You are now a licensed Biotech & IP Legal Counsel!", "fa-balance-scale", "grad");
-            state.decisionLog.push("Earned Juris Doctor (J.D.) Law Degree & Passed Bar Exam");
+            addLogEvent("⚖️ <b>GRADUATED LAW SCHOOL & PASSED BAR EXAM!</b> Earned your Juris Doctor (J.D.) degree in Biotech & IP Law!", "grad");
+            state.decisionsMade.push("Earned Juris Doctor (J.D.) Law Degree");
 
             closeModal();
             updateUI();
@@ -1495,90 +1138,81 @@
 
         function openEducationModal() {
             let html = `
-                <div class="p-4 bg-bioCream rounded-xl border border-bioTanLight text-xs space-y-2">
-                    <div class="font-bold text-bioDark text-sm flex items-center gap-2"><i class="fas fa-graduation-cap text-bioDark"></i> Educational Profile</div>
+                <div class="p-4 bg-emerald-50 rounded-xl border border-emerald-200 text-xs space-y-2">
+                    <div class="font-bold text-bioDark text-sm"><i class="fas fa-graduation-cap text-bioMedium"></i> Current Educational Attainment</div>
                     <p><b>Status:</b> ${state.educationLevel.toUpperCase()}</p>
-                    ${state.major ? `<p><b>Declared Major:</b> B.S. in ${state.major.name}</p>` : '<p><i>No college major declared yet.</i></p>'}
-                    ${state.hasPassedBarExam ? `<p><b>Graduate Degree:</b> Juris Doctor (J.D.) & Bar Exam License</p>` : ''}
-                    <p><b>Smarts Level:</b> ${Math.round(state.smarts)}%</p>
+                    ${state.major ? `<p><b>Major/Degree:</b> B.S. in ${state.major.name}</p>` : ''}
+                    ${state.hasLawDegree ? `<p><b>Post-Graduate:</b> Juris Doctor (J.D.) Degree + Bar Exam Passed</p>` : ''}
+                    <p><b>Knowledge Level:</b> ${Math.round(state.knowledge)}%</p>
                 </div>
             `;
 
             showModal("Education Profile", "fa-university", html, [
-                { text: "Select College Major", primary: true, onClick: () => { closeModal(); openDegreeSelectionModal(); } },
+                { text: "Change/Select Degree", primary: true, onClick: () => { closeModal(); openDegreeSelectionModal(); } },
                 { text: "Close", primary: false, onClick: closeModal }
             ]);
         }
 
         /* ==========================================================================
-           16. END-GAME & CHOICE REFLECTION SUMMARY MODAL
+           5. GAME END & SUMMARY REPORT MODAL
            ========================================================================== */
+
         function openSummaryModal() {
             let html = `
                 <div class="space-y-3 text-xs">
-                    <div class="p-4 bg-bioDark text-white rounded-xl border-2 border-bioGold text-center">
-                        <div class="text-3xl mb-1">🧬</div>
-                        <h4 class="font-heading font-bold text-lg text-bioGold">${state.name}'s Choice Reflection</h4>
-                        <p class="text-xs text-bioTanLight">Age ${state.age} • Year ${state.year}</p>
+                    <div class="p-4 bg-bioDark text-white rounded-xl border-2 border-bioAccent text-center">
+                        <div class="text-2xl mb-1">🧬</div>
+                        <h4 class="font-heading font-bold text-lg text-bioAccent">${state.name}'s Biotech Career Resume</h4>
+                        <p class="text-xs text-bioCream/80">Age ${state.age} • Year ${state.year}</p>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-2 text-center">
-                        <div class="p-2.5 bg-bioCream rounded-xl border border-bioTanLight">
-                            <span class="block text-[9px] text-bioSlate uppercase font-bold">Bank Cash</span>
-                            <span class="font-bold text-emerald-700 text-sm sm:text-base font-mono">$${state.funds.toLocaleString()}</span>
+                    <div class="grid grid-cols-2 gap-2 text-center">
+                        <div class="p-2.5 bg-gray-100 rounded-lg">
+                            <span class="block text-[10px] text-gray-500 uppercase font-bold">Lifetime Earnings</span>
+                            <span class="font-bold text-emerald-700 text-base font-mono">$${state.funds.toLocaleString()}</span>
                         </div>
-                        <div class="p-2.5 bg-bioPink rounded-xl border border-red-200">
-                            <span class="block text-[9px] text-red-800 uppercase font-bold">Student Debt</span>
-                            <span class="font-bold text-red-700 text-sm sm:text-base font-mono">$${state.debt.toLocaleString()}</span>
-                        </div>
-                        <div class="p-2.5 bg-bioCream rounded-xl border border-bioTanLight">
-                            <span class="block text-[9px] text-bioSlate uppercase font-bold">Career</span>
+                        <div class="p-2.5 bg-gray-100 rounded-lg">
+                            <span class="block text-[10px] text-gray-500 uppercase font-bold">Current Career</span>
                             <span class="font-bold text-bioDark text-xs truncate block">${state.currentJob ? state.currentJob.title : "Unemployed"}</span>
                         </div>
                     </div>
 
-                    <div class="p-3 bg-white rounded-xl border border-bioTanLight">
-                        <span class="font-bold text-bioDark text-xs block mb-1.5"><i class="fas fa-list-ol text-bioDark mr-1"></i> Chronological Decision Log</span>
-                        <ul class="list-disc list-inside space-y-1 text-[11px] text-bioSlate max-h-[150px] overflow-y-auto">
-                            ${state.decisionLog.length > 0 ? state.decisionLog.map(d => `<li>${d}</li>`).join('') : '<li>Graduated High School</li>'}
+                    <div class="p-3 bg-white rounded-lg border border-gray-200">
+                        <span class="font-bold text-bioDark text-xs block mb-1">Key Decisions & Achievements</span>
+                        <ul class="list-disc list-inside space-y-1 text-[11px] text-gray-600 max-h-[140px] overflow-y-auto">
+                            ${state.decisionsMade.map(d => `<li>${d}</li>`).join('')}
                         </ul>
                     </div>
                 </div>
             `;
 
-            showModal("Life & Career Reflection Summary", "fa-scroll", html, [
-                { text: "Restart Life", primary: true, onClick: () => { closeModal(); restartGame(); } },
+            showModal("Career Journey Reflection", "fa-scroll", html, [
+                { text: "Play Again / Restart", primary: true, onClick: () => { closeModal(); restartGame(); } },
                 { text: "Close", primary: false, onClick: closeModal }
             ]);
         }
 
         function restartGame(confirmFirst = false) {
-            if (confirmFirst && !confirm("Are you sure you want to restart your simulation?")) return;
+            if (confirmFirst && !confirm("Are you sure you want to restart your biotech life simulation?")) return;
 
             state = {
                 name: "Alex Morgan",
                 age: 18,
                 year: 2026,
                 funds: 5000,
-                debt: 0,
-                happiness: 80,
-                health: 90,
-                smarts: 55,
-                experience: 10,
+                knowledge: 50,
+                network: 30,
+                energy: 80,
                 educationLevel: "highschool",
                 major: null,
                 collegeYear: 0,
-                hasPassedBarExam: false,
+                hasLawDegree: false,
                 currentJob: null,
-                careerLevel: "entry",
                 careerYears: 0,
                 salary: 0,
-                jobPerformance: 60,
-                decisionLog: [],
-                timeline: [],
-                soundEnabled: state.soundEnabled,
-                fontScale: state.fontScale,
-                highContrast: state.highContrast
+                lifeLog: [],
+                decisionsMade: [],
+                soundEnabled: state.soundEnabled
             };
 
             document.getElementById("timelineFeed").innerHTML = "";
@@ -1587,6 +1221,7 @@
             document.getElementById("screenStart").classList.remove("hidden");
         }
 
+        // Initialize default view
         window.onload = function() {
             updateUI();
         };
