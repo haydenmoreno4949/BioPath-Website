@@ -116,11 +116,15 @@
         <!-- HEADER WITH CIRCULAR LOGO & REQUIRED SUBTITLE -->
         <header class="bg-bioDark text-white px-3 sm:px-5 py-3 flex justify-between items-center border-b-4 border-bioGold relative z-10 shadow-md">
             <div class="flex items-center gap-3">
-                <!-- Top-Corner BioPath Logo Container (White BP Monogram with Subtle Gold Accent Square) -->
-                <div class="w-11 h-11 rounded-full bg-[#0b2b1e] border-2 border-bioGold flex items-center justify-center shrink-0 shadow-lg overflow-hidden">
-                    <span class="font-heading font-bold text-base sm:text-lg text-white tracking-normal select-none flex items-baseline leading-none">
-                        BP<span class="w-1 h-1 bg-bioGold inline-block ml-0.5 mb-0.5"></span>
-                    </span>
+                <!-- Circular BioPath Leaf-B Logo Container -->
+                <div class="w-11 h-11 rounded-full bg-[#0b2b1e] border-2 border-bioGold flex items-center justify-center shrink-0 shadow-inner overflow-hidden p-0.5">
+                    <!-- Point src directly to your image file name (image_a5d504.png) -->
+                    <img id="siteLogoImg" src="image_a5d504.png" alt="BioPath Logo" class="w-full h-full object-cover rounded-full" onerror="this.style.display='none'; document.getElementById('svgFallbackLogo').classList.remove('hidden');">
+                    <!-- Vector SVG matching your uploaded Leaf-B logo -->
+                    <svg id="svgFallbackLogo" viewBox="0 0 100 100" class="w-7 h-7 hidden" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 40 16 C 40 16 30 36 30 54 C 30 70 40 84 54 84 C 43 75 40 62 41 48 C 42 35 52 24 40 16 Z" fill="#e5edd8"/>
+                        <path opacity="0.95" d="M 44 20 H 58 C 67 20 74 26 74 34 C 74 41 68 46 58 46 H 46 V 20 Z M 46 50 H 60 C 69 50 76 56 76 66 C 76 76 68 82 58 82 H 44 V 50 Z" fill="#e5edd8"/>
+                    </svg>
                 </div>
                 <div>
                     <h1 class="font-heading font-bold text-base sm:text-xl tracking-wide leading-tight text-white flex items-center gap-2">
@@ -154,7 +158,7 @@
                     <i id="soundIcon" class="fas fa-volume-up"></i>
                 </button>
                 <!-- Restart Simulation Button -->
-                <button onclick="confirmRestartModal()" class="text-xs bg-bioBrown hover:bg-amber-900 px-2.5 py-1.5 rounded-lg text-white border border-bioGold/50 transition flex items-center gap-1" title="Restart Life">
+                <button onclick="restartGame(true)" class="text-xs bg-bioBrown hover:bg-amber-900 px-2.5 py-1.5 rounded-lg text-white border border-bioGold/50 transition flex items-center gap-1" title="Restart Life">
                     <i class="fas fa-redo-alt"></i>
                 </button>
             </div>
@@ -1907,7 +1911,7 @@
             if (state.completedInternships.includes(programId)) return;
 
             if (state.smarts < program.reqSmarts) {
-                showModal("Prerequisite Required", "fa-exclamation-triangle", `<p class="text-xs text-bioSlate">You need at least <b>${program.reqSmarts}% Smarts</b> to be accepted into ${program.name}.</p>`, [{ text: "OK", primary: true, onClick: closeModal }]);
+                alert(`You need at least ${program.reqSmarts}% Smarts to be accepted into ${program.name}!`);
                 return;
             }
 
@@ -1975,18 +1979,12 @@
             if (state.completedActivitiesThisYear.includes(type)) return;
 
             if (type === 'gym') {
-                if (state.funds < 50) { 
-                    showModal("Insufficient Funds", "fa-coins", `<p class="text-xs text-bioSlate">You need at least <b>$50</b> in bank cash to hit the gym.</p>`, [{ text: "OK", primary: true, onClick: closeModal }]);
-                    return; 
-                }
+                if (state.funds < 50) { alert("Insufficient funds!"); return; }
                 state.funds -= 50;
                 state.health = Math.min(100, state.health + 8);
                 addTimelineEvent("🏋️ Worked out at the local gym (+8% Health).", "fa-dumbbell", "normal");
             } else if (type === 'vacation') {
-                if (state.funds < 600) { 
-                    showModal("Insufficient Funds", "fa-coins", `<p class="text-xs text-bioSlate">You need at least <b>$600</b> in bank cash for a Cape May vacation.</p>`, [{ text: "OK", primary: true, onClick: closeModal }]);
-                    return; 
-                }
+                if (state.funds < 600) { alert("Insufficient funds!"); return; }
                 state.funds -= 600;
                 state.happiness = Math.min(100, state.happiness + 18);
                 state.health = Math.min(100, state.health + 5);
@@ -2032,7 +2030,7 @@
             `;
 
             showModal("BioPath Life & Career Summary", "fa-scroll", html, [
-                { text: "Play Again / Restart", primary: false, onClick: confirmRestartModal },
+                { text: "Play Again / Restart", primary: false, onClick: () => restartGame(true) },
                 { text: "Continue Game", primary: true, onClick: closeModal }
             ]);
         }
@@ -2040,24 +2038,9 @@
         /* ==========================================================================
            19. RESTART GAME ENGINE
            ========================================================================== */
-        function confirmRestartModal() {
-            showModal(
-                "Restart Simulation",
-                "fa-redo-alt",
-                `
-                <div class="text-center space-y-2">
-                    <p class="font-bold text-bioDark text-sm">Are you sure you want to restart your simulation?</p>
-                    <p class="text-xs text-bioSlate">All your current career, degree, and life progress will be reset.</p>
-                </div>
-                `,
-                [
-                    { text: "Cancel", primary: false, onClick: closeModal },
-                    { text: "Yes, Restart Life", primary: true, onClick: restartGame }
-                ]
-            );
-        }
+        function restartGame(confirmRestart = false) {
+            if (confirmRestart && !confirm("Are you sure you want to restart your simulation? All progress will be reset.")) return;
 
-        function restartGame() {
             state = {
                 name: "Alex Morgan",
                 age: 18,
