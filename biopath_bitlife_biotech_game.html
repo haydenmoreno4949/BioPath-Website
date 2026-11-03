@@ -1177,7 +1177,7 @@
 
             if (state.currentJob) {
                 statusText += ` • ${state.currentJob.title} ($${state.salary.toLocaleString()}/yr)`;
-            } else if (state.age >= 85) {
+            } else if (state.age >= 65) {
                 statusText += " • Retired";
             } else {
                 statusText += " • Unemployed";
@@ -1259,10 +1259,10 @@
             state.completedActivitiesThisYear = [];
             playChime("normal");
 
-            // Cap at age 85 - Retirement & Game End
-            if (state.age >= 85) {
-                state.decisionLog.push(`Officially Retired at Age 85`);
-                addTimelineEvent(`🌅 <b>RETIREMENT & GAME END:</b> You reached age 85 and officially retired from your biotechnology career after a full and distinguished life! Time to review your life summary and achievements!`, "fa-monument", "event");
+            // Cap at age 65 - Retirement & Game End
+            if (state.age >= 65) {
+                state.decisionLog.push(`Officially Retired at Age 65`);
+                addTimelineEvent(`🌅 <b>RETIREMENT & GAME END:</b> You reached age 65 and officially retired from your biotechnology career after a full and distinguished life! Time to review your life summary and achievements!`, "fa-monument", "event");
                 updateUI();
                 openSummaryModal();
                 return;
@@ -1340,7 +1340,7 @@
             updateUI();
 
             // TRIGGER INTERACTIVE ANNUAL POPUP SCENARIO
-            if (state.age < 85) {
+            if (state.age < 65) {
                 setTimeout(triggerAnnualScenarioPopup, 400);
             }
         }
