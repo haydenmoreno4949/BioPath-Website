@@ -402,16 +402,3 @@ function openCompanyModal(index) {
 function closeModal() {
   document.getElementById('info-modal').classList.add('hidden');
 }
-        <section id="hero" class="hero-section">
-        <div class="hero-content">
-          <span class="section-tagline">Navigating Life Sciences</span>
-          <h1 class="hero-title">Search Career Paths</h1>
-          <p class="hero-description">
-            Explore biotechnology career profiles organized into 5 primary industry sectors. Search for specific roles or scroll through the sector columns below.
-          </p>
-          <div class="hero-actions">
-            <a href="#careers" class="btn btn-primary">Explore Careers <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="#degrees" class="btn btn-secondary">Filter by Degree</a>
-          </div>
-        </div>
-      </section>
