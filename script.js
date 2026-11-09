@@ -141,28 +141,82 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
-  
-    // Close Modal on Escape Keypress
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
+   // Robust Modal Close Function
+function closeModal() {
+  const modalOverlay = document.getElementById('modalOverlay');
+  if (modalOverlay) {
+    modalOverlay.classList.remove('active');
+  }
+  document.body.style.overflow = ''; // Restores background scrolling
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalClose = document.getElementById('modalClose');
+
+  // 1. Close when clicking the "X" button in the top right of the drawer
+  if (modalClose) {
+    modalClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal();
+    });
+  }
+
+  // 2. Close when clicking the dark backdrop overlay outside the drawer
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
         closeModal();
       }
     });
-  
-    // Close Modal on Overlay Click
-    const modalOverlay = document.getElementById('modalOverlay');
-    if (modalOverlay) {
-      modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) {
-          closeModal();
-        }
-      });
+  }
+
+  // 3. Close when pressing the Escape key on the keyboard
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
     }
+  });
+});
     
-    const modalClose = document.getElementById('modalClose');
-    if (modalClose) {
-      modalClose.addEventListener('click', closeModal);
-    }
+    // 7. Dedicated Search Logic for careers.html 5-Column Matrix
+const careerSearchInput = document.getElementById('careerSearchInput');
+if (careerSearchInput) {
+  careerSearchInput.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    const jobCards = document.querySelectorAll('.columns-section .job-card');
+    const sectorColumns = document.querySelectorAll('.sector-column');
+
+    jobCards.forEach(card => {
+      const title = card.querySelector('.job-title')?.textContent.toLowerCase() || '';
+      const summary = card.querySelector('.job-summary')?.textContent.toLowerCase() || '';
+      const keywords = card.getAttribute('data-keywords')?.toLowerCase() || '';
+      const meta = card.querySelector('.job-meta-block')?.textContent.toLowerCase() || '';
+      const details = card.querySelector('.job-details-expand')?.textContent.toLowerCase() || '';
+
+      const isMatch = !query || 
+        title.includes(query) || 
+        summary.includes(query) || 
+        keywords.includes(query) || 
+        meta.includes(query) || 
+        details.includes(query);
+
+      card.style.display = isMatch ? 'block' : 'none';
+    });
+
+    // Update role counts per column and hide empty columns during search
+    sectorColumns.forEach(column => {
+      const visibleCards = column.querySelectorAll('.job-card[style*="display: block"], .job-card:not([style*="display: none"])');
+      const countTag = column.querySelector('.col-count');
+      
+      if (countTag) {
+        countTag.textContent = `${visibleCards.length} Role${visibleCards.length === 1 ? '' : 's'}`;
+      }
+
+      column.style.display = visibleCards.length > 0 ? 'block' : 'none';
+    });
+  });
+}
   });
   
   // 6. Modal / Slide-over Drawer Functions

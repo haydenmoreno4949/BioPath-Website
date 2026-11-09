@@ -277,10 +277,12 @@ a:hover{
 }
   
   .hero-title {
+    font-family: var(--font-serif);
     font-size: 3.8rem;
     max-width: 850px;
     margin-bottom: 1.5rem;
     letter-spacing: -0.01em;
+    
   }
   
   .hero-description {
